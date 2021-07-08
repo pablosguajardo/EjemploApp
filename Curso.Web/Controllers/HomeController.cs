@@ -23,8 +23,9 @@ namespace Curso.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Quienes()
         {
+            ViewData["Title"] = "Quienes somos!!!!";
             return View();
         }
 

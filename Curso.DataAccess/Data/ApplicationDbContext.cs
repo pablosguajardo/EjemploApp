@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Curso.Web.Data
+namespace Curso.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
