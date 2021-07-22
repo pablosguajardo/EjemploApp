@@ -34,7 +34,7 @@ namespace Curso.Web
                     Configuration.GetConnectionString("DefaultConnection")));
 
             //contexto de app:
-            services.AddDbContext<AppCursoContext>(options =>
+            services.AddDbContext<EjAppContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>()
