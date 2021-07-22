@@ -11,9 +11,9 @@ namespace Curso.Web.Controllers
 {
     public class PersonasTipoController : Controller
     {
-        private readonly AppCursoContext _context;
+        private readonly EjAppContext _context;
 
-        public PersonasTipoController(AppCursoContext context)
+        public PersonasTipoController(EjAppContext context)
         {
             _context = context;
         }
