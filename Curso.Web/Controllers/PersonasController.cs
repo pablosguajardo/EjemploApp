@@ -58,11 +58,31 @@ namespace Curso.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona")] Personas personas)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(personas);
+                if (ModelState.IsValid)
+                {
+                    _context.Add(personas);
+                    await _context.SaveChangesAsync();
+
+                    var log = new Logs();
+                    log.IsError = false;
+                    log.Description = "Persona creada";
+                    log.Message = $"Persona creada a las {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}";
+                    _context.Add(log);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (Exception ex )
+            {
+                var log = new Logs();
+                log.IsError = true;
+                log.Description = "error en Create POST";
+                log.Message = $"Error {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}: {ex.ToString()}";
+                _context.Add(log);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
             ViewData["IdTipoPersona"] = new SelectList(_context.PersonasTipo, "Id", "Nombre", personas.IdTipoPersona);
             return View(personas);
