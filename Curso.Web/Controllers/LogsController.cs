@@ -9,23 +9,22 @@ using Curso.DataAccess.Models;
 
 namespace Curso.Web.Controllers
 {
-    public class PersonasController : Controller
+    public class LogsController : Controller
     {
         private readonly EjAppContext _context;
 
-        public PersonasController(EjAppContext context)
+        public LogsController(EjAppContext context)
         {
             _context = context;
         }
 
-        // GET: Personas
+        // GET: Logs
         public async Task<IActionResult> Index()
         {
-            var EjAppContext = _context.Personas.Include(p => p.IdTipoPersonaNavigation);
-            return View(await EjAppContext.ToListAsync());
+            return View(await _context.Logs.ToListAsync());
         }
 
-        // GET: Personas/Details/5
+        // GET: Logs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var personas = await _context.Personas
-                .Include(p => p.IdTipoPersonaNavigation)
+            var logs = await _context.Logs
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (personas == null)
+            if (logs == null)
             {
                 return NotFound();
             }
 
-            return View(personas);
+            return View(logs);
         }
 
-        // GET: Personas/Create
+        // GET: Logs/Create
         public IActionResult Create()
         {
-            ViewData["IdTipoPersona"] = new SelectList(_context.PersonasTipo, "Id", "Nombre");
             return View();
         }
 
-        // POST: Personas/Create
+        // POST: Logs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona")] Personas personas)
+        public async Task<IActionResult> Create([Bind("Id,IsError,Description,Message")] Logs logs)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(personas);
+                _context.Add(logs);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTipoPersona"] = new SelectList(_context.PersonasTipo, "Id", "Nombre", personas.IdTipoPersona);
-            return View(personas);
+            return View(logs);
         }
 
-        // GET: Personas/Edit/5
+        // GET: Logs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var personas = await _context.Personas.FindAsync(id);
-            if (personas == null)
+            var logs = await _context.Logs.FindAsync(id);
+            if (logs == null)
             {
                 return NotFound();
             }
-            ViewData["IdTipoPersona"] = new SelectList(_context.PersonasTipo, "Id", "Nombre", personas.IdTipoPersona);
-            return View(personas);
+            return View(logs);
         }
 
-        // POST: Personas/Edit/5
+        // POST: Logs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona")] Personas personas)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IsError,Description,Message")] Logs logs)
         {
-            if (id != personas.Id)
+            if (id != logs.Id)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace Curso.Web.Controllers
             {
                 try
                 {
-                    _context.Update(personas);
+                    _context.Update(logs);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonasExists(personas.Id))
+                    if (!LogsExists(logs.Id))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace Curso.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTipoPersona"] = new SelectList(_context.PersonasTipo, "Id", "Nombre", personas.IdTipoPersona);
-            return View(personas);
+            return View(logs);
         }
 
-        // GET: Personas/Delete/5
+        // GET: Logs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var personas = await _context.Personas
-                .Include(p => p.IdTipoPersonaNavigation)
+            var logs = await _context.Logs
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (personas == null)
+            if (logs == null)
             {
                 return NotFound();
             }
 
-            return View(personas);
+            return View(logs);
         }
 
-        // POST: Personas/Delete/5
+        // POST: Logs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var personas = await _context.Personas.FindAsync(id);
-            _context.Personas.Remove(personas);
+            var logs = await _context.Logs.FindAsync(id);
+            _context.Logs.Remove(logs);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonasExists(int id)
+        private bool LogsExists(int id)
         {
-            return _context.Personas.Any(e => e.Id == id);
+            return _context.Logs.Any(e => e.Id == id);
         }
     }
 }

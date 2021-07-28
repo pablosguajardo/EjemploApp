@@ -29,6 +29,7 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<CategoriaProducto> CategoriaProducto { get; set; }
         public virtual DbSet<ClienteTipo> ClienteTipo { get; set; }
         public virtual DbSet<ComprasDetalle> ComprasDetalle { get; set; }
+        public virtual DbSet<Logs> Logs { get; set; }
         public virtual DbSet<Personas> Personas { get; set; }
         public virtual DbSet<PersonasTipo> PersonasTipo { get; set; }
         public virtual DbSet<ProductoTipo> ProductoTipo { get; set; }
@@ -190,6 +191,17 @@ namespace Curso.DataAccess.Models
                     .HasColumnName("descripcion")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Logs>(entity =>
+            {
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.Message)
+                    .IsRequired()
+                    .HasColumnType("text");
             });
 
             modelBuilder.Entity<Personas>(entity =>
