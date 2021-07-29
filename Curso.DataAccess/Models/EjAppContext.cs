@@ -28,6 +28,7 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CategoriaProducto> CategoriaProducto { get; set; }
         public virtual DbSet<ClienteTipo> ClienteTipo { get; set; }
+        public virtual DbSet<Compras> Compras { get; set; }
         public virtual DbSet<ComprasDetalle> ComprasDetalle { get; set; }
         public virtual DbSet<FormaDePago> FormaDePago { get; set; }
         public virtual DbSet<Logs> Logs { get; set; }
@@ -177,6 +178,38 @@ namespace Curso.DataAccess.Models
                     .IsRequired()
                     .HasMaxLength(10)
                     .IsFixedLength();
+            });
+
+            modelBuilder.Entity<Compras>(entity =>
+            {
+                entity.HasKey(e => e.IdCompras);
+
+                entity.Property(e => e.IdCompras).HasColumnName("idCompras");
+
+                entity.Property(e => e.FechaCompra)
+                    .HasColumnName("Fecha_compra")
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.Property(e => e.IdCompraDetalle).HasColumnName("idCompraDetalle");
+
+                entity.Property(e => e.Idformapago).HasColumnName("idformapago");
+
+                entity.Property(e => e.NroCompra).HasColumnName("Nro_Compra");
+
+                entity.Property(e => e.PuntoDeVenta)
+                    .HasColumnName("Punto_de_venta")
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.IdCompraDetalleNavigation)
+                    .WithMany(p => p.Compras)
+                    .HasForeignKey(d => d.IdCompraDetalle)
+                    .HasConstraintName("FK_Compras_ComprasDetalle");
+
+                entity.HasOne(d => d.IdformapagoNavigation)
+                    .WithMany(p => p.Compras)
+                    .HasForeignKey(d => d.Idformapago)
+                    .HasConstraintName("FK_Compras_FormaDePago");
             });
 
             modelBuilder.Entity<ComprasDetalle>(entity =>
