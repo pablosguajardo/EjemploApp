@@ -9,7 +9,14 @@ namespace Curso.DataAccess.Models
 {
     public partial class ComprasDetalle
     {
+        public ComprasDetalle()
+        {
+            Compras = new HashSet<Compras>();
+        }
+
         public int IdComprasDetalle { get; set; }
         public string Descripcion { get; set; }
+
+        public virtual ICollection<Compras> Compras { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+﻿@model Curso.DataAccess.Models.Compras
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Modificar datos de la compra</h1>
+
+<h4>Compras</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCompras" />
+            <div class="form-group">
+                <label asp-for="NroCompra" class="control-label"></label>
+                <input asp-for="NroCompra" class="form-control" />
+                <span asp-validation-for="NroCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PuntoDeVenta" class="control-label"></label>
+                <input asp-for="PuntoDeVenta" class="form-control" />
+                <span asp-validation-for="PuntoDeVenta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCompraDetalle" class="control-label"></label>
+                <select asp-for="IdCompraDetalle" class="form-control" asp-items="ViewBag.IdCompraDetalle"></select>
+                <span asp-validation-for="IdCompraDetalle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idformapago" class="control-label"></label>
+                <select asp-for="Idformapago" class="form-control" asp-items="ViewBag.Idformapago"></select>
+                <span asp-validation-for="Idformapago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
