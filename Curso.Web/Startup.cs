@@ -1,3 +1,5 @@
+using Curso.Common.Models;
+using Curso.Common.Utils;
 using Curso.DataAccess.Data;
 using Curso.DataAccess.Models;
 using Microsoft.AspNetCore.Builder;
@@ -5,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,9 +43,8 @@ namespace Curso.Web
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+                                                //20210729:
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
 
             services.Configure<IdentityOptions>(options =>
@@ -57,6 +59,10 @@ namespace Curso.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
             });
+
+            //20210729:
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddSingleton<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Curso.Common\Curso.Common.csproj" />
     <ProjectReference Include="..\Curso.DataAccess\Curso.DataAccess.csproj" />
   </ItemGroup>
 
