@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
+using Curso.Common.Utils;
 
 namespace Curso.Web.Controllers
 {
@@ -21,6 +22,8 @@ namespace Curso.Web.Controllers
         // GET: Personas
         public async Task<IActionResult> Index()
         {
+            //string fecha = Helpers.GetDateTimeString();
+
             var EjAppContext = _context.Personas.Include(p => p.IdTipoPersonaNavigation);
             return View(await EjAppContext.ToListAsync());
         }

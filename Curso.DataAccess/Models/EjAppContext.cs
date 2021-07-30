@@ -28,6 +28,7 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CategoriaProducto> CategoriaProducto { get; set; }
         public virtual DbSet<ClienteTipo> ClienteTipo { get; set; }
+        public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<Compras> Compras { get; set; }
         public virtual DbSet<ComprasDetalle> ComprasDetalle { get; set; }
         public virtual DbSet<FormaDePago> FormaDePago { get; set; }
@@ -178,6 +179,33 @@ namespace Curso.DataAccess.Models
                     .IsRequired()
                     .HasMaxLength(10)
                     .IsFixedLength();
+            });
+
+            modelBuilder.Entity<Clientes>(entity =>
+            {
+                entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Direccion)
+                    .HasMaxLength(200)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(30)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.ClienteTipo)
+                    .WithMany(p => p.Clientes)
+                    .HasForeignKey(d => d.ClienteTipoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Clientes_ClienteTipo");
             });
 
             modelBuilder.Entity<Compras>(entity =>
