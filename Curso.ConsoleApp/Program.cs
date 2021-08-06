@@ -32,6 +32,20 @@ namespace Curso.ConsoleApp
                     return null;
                 }
 
+
+             private static List<string> GetHeadesTypeOf(FeedBackReportResponseModel results)
+            {
+                List<string> resList = new List<string>();
+                Type t = results.items.FirstOrDefault().GetType();
+                // Get the public properties.
+                PropertyInfo[] propInfos = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var propInfo in propInfos)
+                {
+                    resList.Add(propInfo.Name);
+                }
+                return resList;
+            }
+
             */
             Console.WriteLine("process end");
         }
