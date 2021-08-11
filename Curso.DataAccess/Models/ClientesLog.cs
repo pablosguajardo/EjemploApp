@@ -7,13 +7,8 @@ using System.Collections.Generic;
 
 namespace Curso.DataAccess.Models
 {
-    public partial class Clientes
+    public partial class ClientesLog
     {
-        public Clientes()
-        {
-            ClientesLog = new HashSet<ClientesLog>();
-        }
-
         public int Id { get; set; }
         public string Apellido { get; set; }
         public string Nombre { get; set; }
@@ -21,8 +16,10 @@ namespace Curso.DataAccess.Models
         public string Email { get; set; }
         public int ClienteTipoId { get; set; }
         public int ClienteCategoriaId { get; set; }
+        public int IdCliente { get; set; }
+        public string IdUsuario { get; set; }
 
-        public virtual ClienteTipo ClienteTipo { get; set; }
-        public virtual ICollection<ClientesLog> ClientesLog { get; set; }
+        public virtual Clientes IdClienteNavigation { get; set; }
+        public virtual AspNetUsers IdUsuarioNavigation { get; set; }
     }
 }
