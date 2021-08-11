@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
@@ -19,12 +20,14 @@ namespace Curso.Web.Controllers
         }
 
         // GET: ProveedoresCategorias
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.ProveedoresCategoria.ToListAsync());
         }
 
         // GET: ProveedoresCategorias/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,6 +46,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: ProveedoresCategorias/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +57,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("IdCategoriaProveedores,NombreCategoria,DescripcionCategoria")] ProveedoresCategoria proveedoresCategoria)
         {
             if (ModelState.IsValid)
@@ -65,6 +70,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: ProveedoresCategorias/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +91,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("IdCategoriaProveedores,NombreCategoria,DescripcionCategoria")] ProveedoresCategoria proveedoresCategoria)
         {
             if (id != proveedoresCategoria.IdCategoriaProveedores)
@@ -116,6 +123,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: ProveedoresCategorias/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +144,7 @@ namespace Curso.Web.Controllers
         // POST: ProveedoresCategorias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var proveedoresCategoria = await _context.ProveedoresCategoria.FindAsync(id);
