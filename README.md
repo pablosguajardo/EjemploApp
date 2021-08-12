@@ -1,2 +1,0 @@
-# EjemploApp
-Un ejemplo sencillo 

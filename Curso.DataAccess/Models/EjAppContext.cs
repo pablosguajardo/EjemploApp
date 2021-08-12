@@ -29,6 +29,7 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<CategoriaProducto> CategoriaProducto { get; set; }
         public virtual DbSet<ClienteTipo> ClienteTipo { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<ClientesLog> ClientesLog { get; set; }
         public virtual DbSet<Compras> Compras { get; set; }
         public virtual DbSet<ComprasDetalle> ComprasDetalle { get; set; }
         public virtual DbSet<FormaDePago> FormaDePago { get; set; }
@@ -206,6 +207,40 @@ namespace Curso.DataAccess.Models
                     .HasForeignKey(d => d.ClienteTipoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Clientes_ClienteTipo");
+            });
+
+            modelBuilder.Entity<ClientesLog>(entity =>
+            {
+                entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Direccion)
+                    .HasMaxLength(200)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(30)
+                    .IsFixedLength();
+
+                entity.Property(e => e.IdUsuario).HasMaxLength(450);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.IdClienteNavigation)
+                    .WithMany(p => p.ClientesLog)
+                    .HasForeignKey(d => d.IdCliente)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClientesLog_Clientes");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.ClientesLog)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK_ClientesLog_AspNetUsers");
             });
 
             modelBuilder.Entity<Compras>(entity =>

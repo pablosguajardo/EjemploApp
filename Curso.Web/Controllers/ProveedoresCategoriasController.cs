@@ -10,22 +10,24 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
-    public class ComprasDetallesController : Controller
+    public class ProveedoresCategoriasController : Controller
     {
         private readonly EjAppContext _context;
 
-        public ComprasDetallesController(EjAppContext context)
+        public ProveedoresCategoriasController(EjAppContext context)
         {
             _context = context;
         }
 
-        // GET: ComprasDetalles
+        // GET: ProveedoresCategorias
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ComprasDetalle.ToListAsync());
+            return View(await _context.ProveedoresCategoria.ToListAsync());
         }
 
-        // GET: ComprasDetalles/Details/5
+        // GET: ProveedoresCategorias/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +35,42 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle
-                .FirstOrDefaultAsync(m => m.IdComprasDetalle == id);
-            if (comprasDetalle == null)
+            var proveedoresCategoria = await _context.ProveedoresCategoria
+                .FirstOrDefaultAsync(m => m.IdCategoriaProveedores == id);
+            if (proveedoresCategoria == null)
             {
                 return NotFound();
             }
 
-            return View(comprasDetalle);
+            return View(proveedoresCategoria);
         }
 
-        // GET: ComprasDetalles/Create
+        // GET: ProveedoresCategorias/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ComprasDetalles/Create
+        // POST: ProveedoresCategorias/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdComprasDetalle,Descripcion")] ComprasDetalle comprasDetalle)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("IdCategoriaProveedores,NombreCategoria,DescripcionCategoria")] ProveedoresCategoria proveedoresCategoria)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comprasDetalle);
+                _context.Add(proveedoresCategoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(comprasDetalle);
+            return View(proveedoresCategoria);
         }
 
-        // GET: ComprasDetalles/Edit/5
+        // GET: ProveedoresCategorias/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,23 +78,23 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle.FindAsync(id);
-            if (comprasDetalle == null)
+            var proveedoresCategoria = await _context.ProveedoresCategoria.FindAsync(id);
+            if (proveedoresCategoria == null)
             {
                 return NotFound();
             }
-            return View(comprasDetalle);
+            return View(proveedoresCategoria);
         }
 
-        // POST: ComprasDetalles/Edit/5
+        // POST: ProveedoresCategorias/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("IdComprasDetalle,Descripcion")] ComprasDetalle comprasDetalle)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCategoriaProveedores,NombreCategoria,DescripcionCategoria")] ProveedoresCategoria proveedoresCategoria)
         {
-            if (id != comprasDetalle.IdComprasDetalle)
+            if (id != proveedoresCategoria.IdCategoriaProveedores)
             {
                 return NotFound();
             }
@@ -98,12 +103,12 @@ namespace Curso.Web.Controllers
             {
                 try
                 {
-                    _context.Update(comprasDetalle);
+                    _context.Update(proveedoresCategoria);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ComprasDetalleExists(comprasDetalle.IdComprasDetalle))
+                    if (!ProveedoresCategoriaExists(proveedoresCategoria.IdCategoriaProveedores))
                     {
                         return NotFound();
                     }
@@ -114,10 +119,10 @@ namespace Curso.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(comprasDetalle);
+            return View(proveedoresCategoria);
         }
 
-        // GET: ComprasDetalles/Delete/5
+        // GET: ProveedoresCategorias/Delete/5
         [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -126,31 +131,31 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle
-                .FirstOrDefaultAsync(m => m.IdComprasDetalle == id);
-            if (comprasDetalle == null)
+            var proveedoresCategoria = await _context.ProveedoresCategoria
+                .FirstOrDefaultAsync(m => m.IdCategoriaProveedores == id);
+            if (proveedoresCategoria == null)
             {
                 return NotFound();
             }
 
-            return View(comprasDetalle);
+            return View(proveedoresCategoria);
         }
 
-        // POST: ComprasDetalles/Delete/5
+        // POST: ProveedoresCategorias/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Administrador")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comprasDetalle = await _context.ComprasDetalle.FindAsync(id);
-            _context.ComprasDetalle.Remove(comprasDetalle);
+            var proveedoresCategoria = await _context.ProveedoresCategoria.FindAsync(id);
+            _context.ProveedoresCategoria.Remove(proveedoresCategoria);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ComprasDetalleExists(int id)
+        private bool ProveedoresCategoriaExists(int id)
         {
-            return _context.ComprasDetalle.Any(e => e.IdComprasDetalle == id);
+            return _context.ProveedoresCategoria.Any(e => e.IdCategoriaProveedores == id);
         }
     }
 }

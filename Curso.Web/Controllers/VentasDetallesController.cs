@@ -6,26 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
-    public class ComprasDetallesController : Controller
+    public class VentasDetallesController : Controller
     {
         private readonly EjAppContext _context;
 
-        public ComprasDetallesController(EjAppContext context)
+        public VentasDetallesController(EjAppContext context)
         {
             _context = context;
         }
 
-        // GET: ComprasDetalles
+        // GET: VentasDetalles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ComprasDetalle.ToListAsync());
+            return View(await _context.VentasDetalle.ToListAsync());
         }
 
-        // GET: ComprasDetalles/Details/5
+        // GET: VentasDetalles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +32,39 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle
-                .FirstOrDefaultAsync(m => m.IdComprasDetalle == id);
-            if (comprasDetalle == null)
+            var ventasDetalle = await _context.VentasDetalle
+                .FirstOrDefaultAsync(m => m.IdDetalleVenta == id);
+            if (ventasDetalle == null)
             {
                 return NotFound();
             }
 
-            return View(comprasDetalle);
+            return View(ventasDetalle);
         }
 
-        // GET: ComprasDetalles/Create
+        // GET: VentasDetalles/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ComprasDetalles/Create
+        // POST: VentasDetalles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdComprasDetalle,Descripcion")] ComprasDetalle comprasDetalle)
+        public async Task<IActionResult> Create([Bind("IdDetalleVenta,Subtotal,Cantidad,IdCompra,PrecioUnitario,IdProducto")] VentasDetalle ventasDetalle)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comprasDetalle);
+                _context.Add(ventasDetalle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(comprasDetalle);
+            return View(ventasDetalle);
         }
 
-        // GET: ComprasDetalles/Edit/5
+        // GET: VentasDetalles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,23 +72,22 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle.FindAsync(id);
-            if (comprasDetalle == null)
+            var ventasDetalle = await _context.VentasDetalle.FindAsync(id);
+            if (ventasDetalle == null)
             {
                 return NotFound();
             }
-            return View(comprasDetalle);
+            return View(ventasDetalle);
         }
 
-        // POST: ComprasDetalles/Edit/5
+        // POST: VentasDetalles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("IdComprasDetalle,Descripcion")] ComprasDetalle comprasDetalle)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDetalleVenta,Subtotal,Cantidad,IdCompra,PrecioUnitario,IdProducto")] VentasDetalle ventasDetalle)
         {
-            if (id != comprasDetalle.IdComprasDetalle)
+            if (id != ventasDetalle.IdDetalleVenta)
             {
                 return NotFound();
             }
@@ -98,12 +96,12 @@ namespace Curso.Web.Controllers
             {
                 try
                 {
-                    _context.Update(comprasDetalle);
+                    _context.Update(ventasDetalle);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ComprasDetalleExists(comprasDetalle.IdComprasDetalle))
+                    if (!VentasDetalleExists(ventasDetalle.IdDetalleVenta))
                     {
                         return NotFound();
                     }
@@ -114,11 +112,10 @@ namespace Curso.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(comprasDetalle);
+            return View(ventasDetalle);
         }
 
-        // GET: ComprasDetalles/Delete/5
-        [Authorize(Roles = "Administrador")]
+        // GET: VentasDetalles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,31 +123,30 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle
-                .FirstOrDefaultAsync(m => m.IdComprasDetalle == id);
-            if (comprasDetalle == null)
+            var ventasDetalle = await _context.VentasDetalle
+                .FirstOrDefaultAsync(m => m.IdDetalleVenta == id);
+            if (ventasDetalle == null)
             {
                 return NotFound();
             }
 
-            return View(comprasDetalle);
+            return View(ventasDetalle);
         }
 
-        // POST: ComprasDetalles/Delete/5
+        // POST: VentasDetalles/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Administrador")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comprasDetalle = await _context.ComprasDetalle.FindAsync(id);
-            _context.ComprasDetalle.Remove(comprasDetalle);
+            var ventasDetalle = await _context.VentasDetalle.FindAsync(id);
+            _context.VentasDetalle.Remove(ventasDetalle);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ComprasDetalleExists(int id)
+        private bool VentasDetalleExists(int id)
         {
-            return _context.ComprasDetalle.Any(e => e.IdComprasDetalle == id);
+            return _context.VentasDetalle.Any(e => e.IdDetalleVenta == id);
         }
     }
 }
