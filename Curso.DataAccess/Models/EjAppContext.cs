@@ -34,6 +34,7 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<ComprasDetalle> ComprasDetalle { get; set; }
         public virtual DbSet<FormaDePago> FormaDePago { get; set; }
         public virtual DbSet<Logs> Logs { get; set; }
+        public virtual DbSet<PersonaLog> PersonaLog { get; set; }
         public virtual DbSet<Personas> Personas { get; set; }
         public virtual DbSet<PersonasTipo> PersonasTipo { get; set; }
         public virtual DbSet<ProductoTipo> ProductoTipo { get; set; }
@@ -308,6 +309,27 @@ namespace Curso.DataAccess.Models
                 entity.Property(e => e.Message)
                     .IsRequired()
                     .HasColumnType("text");
+            });
+
+            modelBuilder.Entity<PersonaLog>(entity =>
+            {
+                entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdPersonaNavigation)
+                    .WithMany(p => p.PersonaLog)
+                    .HasForeignKey(d => d.IdPersona)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PersonaLog_Personas");
             });
 
             modelBuilder.Entity<Personas>(entity =>

@@ -7,21 +7,15 @@ using System.Collections.Generic;
 
 namespace Curso.DataAccess.Models
 {
-    public partial class Personas
+    public partial class PersonaLog
     {
-        public Personas()
-        {
-            PersonaLog = new HashSet<PersonaLog>();
-        }
-
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int? Hermanos { get; set; }
         public DateTime FechaDeNacimiento { get; set; }
-        public int IdTipoPersona { get; set; }
+        public int IdPersona { get; set; }
 
-        public virtual PersonasTipo IdTipoPersonaNavigation { get; set; }
-        public virtual ICollection<PersonaLog> PersonaLog { get; set; }
+        public virtual Personas IdPersonaNavigation { get; set; }
     }
 }

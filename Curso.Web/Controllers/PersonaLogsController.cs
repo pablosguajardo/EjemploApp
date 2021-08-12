@@ -1,27 +1,31 @@
-﻿using Curso.DataAccess.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Curso.DataAccess.Models;
 
 namespace Curso.Web.Controllers
 {
-    public class CategoriaProductosController : Controller
+    public class PersonaLogsController : Controller
     {
         private readonly EjAppContext _context;
 
-        public CategoriaProductosController(EjAppContext context)
+        public PersonaLogsController(EjAppContext context)
         {
             _context = context;
         }
 
-        // GET: CategoriaProductoes
+        // GET: PersonaLogs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CategoriaProducto.ToListAsync());
+            var ejAppContext = _context.PersonaLog.Include(p => p.IdPersonaNavigation);
+            return View(await ejAppContext.ToListAsync());
         }
 
-        // GET: CategoriaProductoes/Details/5
+        // GET: PersonaLogs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -29,39 +33,42 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var categoriaProducto = await _context.CategoriaProducto
-                .FirstOrDefaultAsync(m => m.IdCategoriaProducto == id);
-            if (categoriaProducto == null)
+            var personaLog = await _context.PersonaLog
+                .Include(p => p.IdPersonaNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (personaLog == null)
             {
                 return NotFound();
             }
 
-            return View(categoriaProducto);
+            return View(personaLog);
         }
 
-        // GET: CategoriaProductoes/Create
+        // GET: PersonaLogs/Create
         public IActionResult Create()
         {
+            ViewData["IdPersona"] = new SelectList(_context.Personas, "Id", "Apellido");
             return View();
         }
 
-        // POST: CategoriaProductoes/Create
+        // POST: PersonaLogs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCategoriaProducto,Nombre,Categoria")] CategoriaProducto categoriaProducto)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdPersona")] PersonaLog personaLog)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categoriaProducto);
+                _context.Add(personaLog);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoriaProducto);
+            ViewData["IdPersona"] = new SelectList(_context.Personas, "Id", "Apellido", personaLog.IdPersona);
+            return View(personaLog);
         }
 
-        // GET: CategoriaProductoes/Edit/5
+        // GET: PersonaLogs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -69,22 +76,23 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var categoriaProducto = await _context.CategoriaProducto.FindAsync(id);
-            if (categoriaProducto == null)
+            var personaLog = await _context.PersonaLog.FindAsync(id);
+            if (personaLog == null)
             {
                 return NotFound();
             }
-            return View(categoriaProducto);
+            ViewData["IdPersona"] = new SelectList(_context.Personas, "Id", "Apellido", personaLog.IdPersona);
+            return View(personaLog);
         }
 
-        // POST: CategoriaProductoes/Edit/5
+        // POST: PersonaLogs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCategoriaProducto,Nombre,Categoria")] CategoriaProducto categoriaProducto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdPersona")] PersonaLog personaLog)
         {
-            if (id != categoriaProducto.IdCategoriaProducto)
+            if (id != personaLog.Id)
             {
                 return NotFound();
             }
@@ -93,12 +101,12 @@ namespace Curso.Web.Controllers
             {
                 try
                 {
-                    _context.Update(categoriaProducto);
+                    _context.Update(personaLog);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriaProductoExists(categoriaProducto.IdCategoriaProducto))
+                    if (!PersonaLogExists(personaLog.Id))
                     {
                         return NotFound();
                     }
@@ -109,10 +117,11 @@ namespace Curso.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoriaProducto);
+            ViewData["IdPersona"] = new SelectList(_context.Personas, "Id", "Apellido", personaLog.IdPersona);
+            return View(personaLog);
         }
 
-        // GET: CategoriaProductoes/Delete/5
+        // GET: PersonaLogs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -120,30 +129,31 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var categoriaProducto = await _context.CategoriaProducto
-                .FirstOrDefaultAsync(m => m.IdCategoriaProducto == id);
-            if (categoriaProducto == null)
+            var personaLog = await _context.PersonaLog
+                .Include(p => p.IdPersonaNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (personaLog == null)
             {
                 return NotFound();
             }
 
-            return View(categoriaProducto);
+            return View(personaLog);
         }
 
-        // POST: CategoriaProductoes/Delete/5
+        // POST: PersonaLogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var categoriaProducto = await _context.CategoriaProducto.FindAsync(id);
-            _context.CategoriaProducto.Remove(categoriaProducto);
+            var personaLog = await _context.PersonaLog.FindAsync(id);
+            _context.PersonaLog.Remove(personaLog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriaProductoExists(int id)
+        private bool PersonaLogExists(int id)
         {
-            return _context.CategoriaProducto.Any(e => e.IdCategoriaProducto == id);
+            return _context.PersonaLog.Any(e => e.Id == id);
         }
     }
 }
