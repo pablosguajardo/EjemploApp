@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
@@ -116,6 +117,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: ClienteTipoes/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +138,7 @@ namespace Curso.Web.Controllers
         // POST: ClienteTipoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var clienteTipo = await _context.ClienteTipo.FindAsync(id);
