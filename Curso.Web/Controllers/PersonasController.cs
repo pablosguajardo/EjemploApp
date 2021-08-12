@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
+using Curso.Common.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
@@ -19,13 +21,17 @@ namespace Curso.Web.Controllers
         }
 
         // GET: Personas
+        [Authorize]
         public async Task<IActionResult> Index()
         {
+            //string fecha = Helpers.GetDateTimeString();
+
             var EjAppContext = _context.Personas.Include(p => p.IdTipoPersonaNavigation);
             return View(await EjAppContext.ToListAsync());
         }
 
         // GET: Personas/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +51,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: Personas/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["IdTipoPersona"] = new SelectList(_context.PersonasTipo, "Id", "Nombre");
@@ -56,19 +63,41 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona")] Personas personas)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(personas);
+                if (ModelState.IsValid)
+                {
+                    _context.Add(personas);
+                    await _context.SaveChangesAsync();
+
+                    var log = new Logs();
+                    log.IsError = false;
+                    log.Description = "Persona creada";
+                    log.Message = $"Persona creada a las {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}";
+                    _context.Add(log);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (Exception ex )
+            {
+                var log = new Logs();
+                log.IsError = true;
+                log.Description = "error en Create POST";
+                log.Message = $"Error {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}: {ex.ToString()}";
+                _context.Add(log);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
             ViewData["IdTipoPersona"] = new SelectList(_context.PersonasTipo, "Id", "Nombre", personas.IdTipoPersona);
             return View(personas);
         }
 
         // GET: Personas/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,6 +119,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona")] Personas personas)
         {
             if (id != personas.Id)
@@ -122,6 +152,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: Personas/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +174,7 @@ namespace Curso.Web.Controllers
         // POST: Personas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var personas = await _context.Personas.FindAsync(id);

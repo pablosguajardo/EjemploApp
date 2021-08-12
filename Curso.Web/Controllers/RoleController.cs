@@ -25,20 +25,20 @@ namespace Curso.Web.Controllers
             this.userManager = userManager;
         }
 
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Index()
         {
             var roles = roleManager.Roles.ToList();
             return View(roles);
         }
 
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Create()
         {
             return View(new IdentityRole());
         }
 
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> Create(IdentityRole role)
         {
@@ -48,7 +48,7 @@ namespace Curso.Web.Controllers
 
 
 
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Edit(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
@@ -67,7 +67,7 @@ namespace Curso.Web.Controllers
             });
         }
 
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> Edit(RoleModification model)
         {
