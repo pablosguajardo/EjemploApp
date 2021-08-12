@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
@@ -85,6 +86,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("IdComprasDetalle,Descripcion")] ComprasDetalle comprasDetalle)
         {
             if (id != comprasDetalle.IdComprasDetalle)
@@ -116,6 +118,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: ComprasDetalles/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +138,7 @@ namespace Curso.Web.Controllers
 
         // POST: ComprasDetalles/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Administrador")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
