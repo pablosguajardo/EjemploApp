@@ -38,7 +38,32 @@ namespace Curso.DataAccess.Validations
 
         }
 
-     
+        public partial class ProductosMetadata
+        {
+            public int ProductId { get; set; }
+
+            [Display(Name = "Nombre")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
+
+            [Display(Name = "Marca")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Marca { get; set; }
+
+            [Display(Name = "Precio")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            public int Precio { get; set; }
+
+            [Display(Name = "Tipo")]
+            public int IdProductoTipoNavigation { get; set; }
+
+            [Display(Name = "Categoria")]
+            public int IdProductoCategoriaNavigation { get; set; }
+        }
+
+
 
         public class EjemploMetadata
         {
