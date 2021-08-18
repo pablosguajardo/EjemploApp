@@ -29,10 +29,12 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<CategoriaProducto> CategoriaProducto { get; set; }
         public virtual DbSet<ClienteTipo> ClienteTipo { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<ClientesLog> ClientesLog { get; set; }
         public virtual DbSet<Compras> Compras { get; set; }
         public virtual DbSet<ComprasDetalle> ComprasDetalle { get; set; }
         public virtual DbSet<FormaDePago> FormaDePago { get; set; }
         public virtual DbSet<Logs> Logs { get; set; }
+        public virtual DbSet<PersonaLog> PersonaLog { get; set; }
         public virtual DbSet<Personas> Personas { get; set; }
         public virtual DbSet<PersonasTipo> PersonasTipo { get; set; }
         public virtual DbSet<ProductoTipo> ProductoTipo { get; set; }
@@ -208,6 +210,40 @@ namespace Curso.DataAccess.Models
                     .HasConstraintName("FK_Clientes_ClienteTipo");
             });
 
+            modelBuilder.Entity<ClientesLog>(entity =>
+            {
+                entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Direccion)
+                    .HasMaxLength(200)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(30)
+                    .IsFixedLength();
+
+                entity.Property(e => e.IdUsuario).HasMaxLength(450);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.IdClienteNavigation)
+                    .WithMany(p => p.ClientesLog)
+                    .HasForeignKey(d => d.IdCliente)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClientesLog_Clientes");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.ClientesLog)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK_ClientesLog_AspNetUsers");
+            });
+
             modelBuilder.Entity<Compras>(entity =>
             {
                 entity.HasKey(e => e.IdCompras);
@@ -273,6 +309,27 @@ namespace Curso.DataAccess.Models
                 entity.Property(e => e.Message)
                     .IsRequired()
                     .HasColumnType("text");
+            });
+
+            modelBuilder.Entity<PersonaLog>(entity =>
+            {
+                entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdPersonaNavigation)
+                    .WithMany(p => p.PersonaLog)
+                    .HasForeignKey(d => d.IdPersona)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PersonaLog_Personas");
             });
 
             modelBuilder.Entity<Personas>(entity =>
