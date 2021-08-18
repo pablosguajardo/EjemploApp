@@ -124,5 +124,16 @@ namespace Curso.DataAccess.Validations
             public bool LockoutEnabled { get; set; }
             public int AccessFailedCount { get; set; }
         }
+        public partial class ProveedoresCategoriaMetadata
+        {
+            [Display(Name = "Nombre de la categoria")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string NombreCategoria { get; set; }
+            [Display(Name = "Descripcion de la categoria")]
+            [StringLength(100, ErrorMessage = "Máximo {1} caracteres")]
+            public string DescripcionCategoria { get; set; }
+
+        }
     }
 }
