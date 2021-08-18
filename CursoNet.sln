@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.ConsoleApp", "Curso.C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{A1F36E2E-F7AF-412D-83A8-4A74FDBABD7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curso.Common", "Curso.Common\Curso.Common.csproj", "{9916B8E3-3C83-4707-AA5F-0C5BCD41DC0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.Common", "Curso.Common\Curso.Common.csproj", "{9916B8E3-3C83-4707-AA5F-0C5BCD41DC0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

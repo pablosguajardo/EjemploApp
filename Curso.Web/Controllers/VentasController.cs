@@ -6,26 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
-    public class ComprasDetallesController : Controller
+    public class VentasController : Controller
     {
         private readonly EjAppContext _context;
 
-        public ComprasDetallesController(EjAppContext context)
+        public VentasController(EjAppContext context)
         {
             _context = context;
         }
 
-        // GET: ComprasDetalles
+        // GET: Ventas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ComprasDetalle.ToListAsync());
+            var ejAppContext = _context.Ventas.Include(v => v.IdVentasDetalleNavigation);
+            return View(await ejAppContext.ToListAsync());
         }
 
-        // GET: ComprasDetalles/Details/5
+        // GET: Ventas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,42 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle
-                .FirstOrDefaultAsync(m => m.IdComprasDetalle == id);
-            if (comprasDetalle == null)
+            var ventas = await _context.Ventas
+                .Include(v => v.IdVentasDetalleNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (ventas == null)
             {
                 return NotFound();
             }
 
-            return View(comprasDetalle);
+            return View(ventas);
         }
 
-        // GET: ComprasDetalles/Create
+        // GET: Ventas/Create
         public IActionResult Create()
         {
+            ViewData["IdVentasDetalle"] = new SelectList(_context.VentasDetalle, "IdDetalleVenta", "IdDetalleVenta");
             return View();
         }
 
-        // POST: ComprasDetalles/Create
+        // POST: Ventas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdComprasDetalle,Descripcion")] ComprasDetalle comprasDetalle)
+        public async Task<IActionResult> Create([Bind("Id,ClientId,Total,Fecha,Descripcion,IdVentasDetalle")] Ventas ventas)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comprasDetalle);
+                _context.Add(ventas);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(comprasDetalle);
+            ViewData["IdVentasDetalle"] = new SelectList(_context.VentasDetalle, "IdDetalleVenta", "IdDetalleVenta", ventas.IdVentasDetalle);
+            return View(ventas);
         }
 
-        // GET: ComprasDetalles/Edit/5
+        // GET: Ventas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,23 +76,23 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle.FindAsync(id);
-            if (comprasDetalle == null)
+            var ventas = await _context.Ventas.FindAsync(id);
+            if (ventas == null)
             {
                 return NotFound();
             }
-            return View(comprasDetalle);
+            ViewData["IdVentasDetalle"] = new SelectList(_context.VentasDetalle, "IdDetalleVenta", "IdDetalleVenta", ventas.IdVentasDetalle);
+            return View(ventas);
         }
 
-        // POST: ComprasDetalles/Edit/5
+        // POST: Ventas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("IdComprasDetalle,Descripcion")] ComprasDetalle comprasDetalle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,Total,Fecha,Descripcion,IdVentasDetalle")] Ventas ventas)
         {
-            if (id != comprasDetalle.IdComprasDetalle)
+            if (id != ventas.Id)
             {
                 return NotFound();
             }
@@ -98,12 +101,12 @@ namespace Curso.Web.Controllers
             {
                 try
                 {
-                    _context.Update(comprasDetalle);
+                    _context.Update(ventas);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ComprasDetalleExists(comprasDetalle.IdComprasDetalle))
+                    if (!VentasExists(ventas.Id))
                     {
                         return NotFound();
                     }
@@ -114,11 +117,11 @@ namespace Curso.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(comprasDetalle);
+            ViewData["IdVentasDetalle"] = new SelectList(_context.VentasDetalle, "IdDetalleVenta", "IdDetalleVenta", ventas.IdVentasDetalle);
+            return View(ventas);
         }
 
-        // GET: ComprasDetalles/Delete/5
-        [Authorize(Roles = "Administrador")]
+        // GET: Ventas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,31 +129,31 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var comprasDetalle = await _context.ComprasDetalle
-                .FirstOrDefaultAsync(m => m.IdComprasDetalle == id);
-            if (comprasDetalle == null)
+            var ventas = await _context.Ventas
+                .Include(v => v.IdVentasDetalleNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (ventas == null)
             {
                 return NotFound();
             }
 
-            return View(comprasDetalle);
+            return View(ventas);
         }
 
-        // POST: ComprasDetalles/Delete/5
+        // POST: Ventas/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Administrador")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comprasDetalle = await _context.ComprasDetalle.FindAsync(id);
-            _context.ComprasDetalle.Remove(comprasDetalle);
+            var ventas = await _context.Ventas.FindAsync(id);
+            _context.Ventas.Remove(ventas);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ComprasDetalleExists(int id)
+        private bool VentasExists(int id)
         {
-            return _context.ComprasDetalle.Any(e => e.IdComprasDetalle == id);
+            return _context.Ventas.Any(e => e.Id == id);
         }
     }
 }
