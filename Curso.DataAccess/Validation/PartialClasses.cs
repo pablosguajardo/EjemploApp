@@ -31,4 +31,9 @@ namespace Curso.DataAccess.Models
     public partial class AspNetUsers
     {
     }
+
+    [ModelMetadataType(typeof(VentasMetadata))]
+    public partial class Ventas
+    {
+    }
 }

@@ -125,4 +125,31 @@ namespace Curso.DataAccess.Validations
             public int AccessFailedCount { get; set; }
         }
     }
+    public class VentasMetadata
+    {
+        [Display(Name = "ClientId")]
+        [Required(ErrorMessage = "El campo ClientId es obligatorio.")]
+        public int ClientId { get; set; }
+
+        [Display(Name = "Total")]
+        [Required(ErrorMessage = "El campo Total es obligatorio.")]
+        public decimal Total { get; set; }
+
+        [Display(Name = "Fecha")]
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "El campo Fecha es obligatorio.")]
+        public DateTime Fecha { get; set; }
+
+        [Display(Name = "Descripcion")]
+        [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "IdVentasDetalle")]
+        [Required(ErrorMessage = "El campo IdVentasDetalle es obligatorio.")]
+        public int IdVentasDetalle { get; set; }
+
+    }
+
+
 }
