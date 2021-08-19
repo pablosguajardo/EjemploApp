@@ -25,12 +25,23 @@ namespace Curso.DataAccess.Models
     {
     }
 
+    [ModelMetadataType(typeof(ProductoTipoMetadata))]
+    public partial class ProductoTipo
+    {
+    }
 
-
-
+    [ModelMetadataType(typeof(ProveedoresCategoriaMetadata))]
+    public partial class ProveedoresCategoria
+    {
+    }
 
     [ModelMetadataType(typeof(AspNetUsersMetadata))]
     public partial class AspNetUsers
+    {
+    }
+
+    [ModelMetadataType(typeof(VentasMetadata))]
+    public partial class Ventas
     {
     }
 }

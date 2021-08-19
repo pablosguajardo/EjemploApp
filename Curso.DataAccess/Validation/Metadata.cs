@@ -103,6 +103,17 @@ namespace Curso.DataAccess.Validations
             public int IdProductoCategoriaNavigation { get; set; }
         }
 
+        public partial class ProductoTipoMetadata
+        {
+            public int ProductId { get; set; }
+
+            [Display(Name = "Descripcion")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Descripcion { get; set; }
+
+        }
+
 
 
         public class EjemploMetadata
@@ -153,5 +164,43 @@ namespace Curso.DataAccess.Validations
             public bool LockoutEnabled { get; set; }
             public int AccessFailedCount { get; set; }
         }
+        public partial class ProveedoresCategoriaMetadata
+        {
+            [Display(Name = "Nombre de la categoria")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string NombreCategoria { get; set; }
+            [Display(Name = "Descripcion de la categoria")]
+            [StringLength(100, ErrorMessage = "Máximo {1} caracteres")]
+            public string DescripcionCategoria { get; set; }
+
+        }
     }
+    public class VentasMetadata
+    {
+        [Display(Name = "ClientId")]
+        [Required(ErrorMessage = "El campo ClientId es obligatorio.")]
+        public int ClientId { get; set; }
+
+        [Display(Name = "Total")]
+        [Required(ErrorMessage = "El campo Total es obligatorio.")]
+        public decimal Total { get; set; }
+
+        [Display(Name = "Fecha")]
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "El campo Fecha es obligatorio.")]
+        public DateTime Fecha { get; set; }
+
+        [Display(Name = "Descripcion")]
+        [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "IdVentasDetalle")]
+        [Required(ErrorMessage = "El campo IdVentasDetalle es obligatorio.")]
+        public int IdVentasDetalle { get; set; }
+
+    }
+
+
 }
