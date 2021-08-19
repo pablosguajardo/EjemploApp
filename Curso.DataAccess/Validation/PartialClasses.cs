@@ -62,6 +62,12 @@ namespace Curso.DataAccess.Models
     public partial class PersonaLog
     {
     }
-    
+
+    [ModelMetadataType(typeof(ClienteTipoMetadata))]
+    public partial class ClienteTipo
+    {
+    }
+
+
 
 }
