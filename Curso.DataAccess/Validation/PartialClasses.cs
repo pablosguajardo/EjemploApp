@@ -15,6 +15,11 @@ namespace Curso.DataAccess.Models
     {
     }
 
+    [ModelMetadataType(typeof(ClientesLogMetadata))]
+    public partial class ClientesLog
+    {
+    }
+
     [ModelMetadataType(typeof(ProductosMetadata))]
     public partial class Productos
     {
