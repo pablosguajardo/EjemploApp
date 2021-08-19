@@ -294,8 +294,23 @@ namespace Curso.DataAccess.Validations
             public virtual ICollection<Ventas> Ventas { get; set; }
         }
 
+        public partial class ClienteTipoMetadata
+
+        {
+            [Display(Name = "Descripcion")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Descripcion { get; set; }
+
+            [Display(Name = "Categoria_ID")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string CategoriaId { get; set; }
+        }
+
+
     }
-   
+
 
     public partial class PersonaLogMetadata
     {
