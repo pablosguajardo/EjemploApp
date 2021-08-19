@@ -47,4 +47,9 @@ namespace Curso.DataAccess.Models
     public partial class Ventas
     {
     }
+
+    [ModelMetadataType(typeof(PersonaLog))]
+    public partial class PersonaLog
+    {
+    }
 }
