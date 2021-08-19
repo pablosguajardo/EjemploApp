@@ -208,6 +208,24 @@ namespace Curso.DataAccess.Validations
             public bool LockoutEnabled { get; set; }
             public int AccessFailedCount { get; set; }
         }
+
+        public partial class ProveedoresMetadata
+        {
+            [Display(Name = "Nombre")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
+            [Display(Name = "Fecha de inscripcion")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [DataType(DataType.Date)]
+            public DateTime FechaInscripcion { get; set; }
+            [Display(Name = "Tipo")]
+            public int IdTipoProveedores { get; set; }
+            [Display(Name = "Categoria")]
+            public int IdCategoriaProveedores { get; set; }
+
+        }
+        
         public partial class ProveedoresCategoriaMetadata
         {
             [Display(Name = "Nombre de la categoria")]
