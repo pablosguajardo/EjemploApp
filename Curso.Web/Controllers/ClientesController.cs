@@ -46,6 +46,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: Clientes/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "CategoriaId");
@@ -71,6 +72,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: Clientes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -125,6 +127,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: Clientes/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
