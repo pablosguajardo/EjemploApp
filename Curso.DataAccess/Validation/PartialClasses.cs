@@ -48,8 +48,17 @@ namespace Curso.DataAccess.Models
     {
     }
 
+<<<<<<< HEAD
     [ModelMetadataType(typeof(PersonaLog))]
     public partial class PersonaLog
     {
     }
+=======
+    [ModelMetadataType(typeof(VentasDetalleMetadata))]
+    public partial class VentasDetalle
+    {
+
+    }
+
+>>>>>>> dc30b4c72bdf2b0e2db5baca1f5fd27cb644f75d
 }

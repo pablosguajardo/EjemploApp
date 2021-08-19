@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Curso.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -189,32 +190,65 @@ namespace Curso.DataAccess.Validations
             public string DescripcionCategoria { get; set; }
 
         }
+
+        public class VentasMetadata
+        {
+            [Display(Name = "ClientId")]
+            [Required(ErrorMessage = "El campo ClientId es obligatorio.")]
+            public int ClientId { get; set; }
+
+            [Display(Name = "Total")]
+            [Required(ErrorMessage = "El campo Total es obligatorio.")]
+            public decimal Total { get; set; }
+
+            [Display(Name = "Fecha")]
+            [DataType(DataType.Date)]
+            [Required(ErrorMessage = "El campo Fecha es obligatorio.")]
+            public DateTime Fecha { get; set; }
+
+            [Display(Name = "Descripcion")]
+            [DataType(DataType.Text)]
+            [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+            public string Descripcion { get; set; }
+
+            [Display(Name = "IdVentasDetalle")]
+            [Required(ErrorMessage = "El campo IdVentasDetalle es obligatorio.")]
+            public int IdVentasDetalle { get; set; }
+
+        }
+
+        public partial class VentasDetalleMetadata
+        {
+
+            public int IdDetalleVenta { get; set; }
+            [Display(Name = "Subtotal")]
+            [Required(ErrorMessage = "Este campo es obligatorio.")]
+            [Range(0, 9999999999999999.99)]
+            public decimal Subtotal { get; set; }
+
+            [Display(Name = "Cantidad")]
+            [Required(ErrorMessage = "Este campo es obligatorio.")]
+            [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
+            [Range(0, 2147483647)]
+            public int Cantidad { get; set; }
+
+            [Display(Name = "ID de compra")]
+            public int IdCompra { get; set; }
+
+            [Display(Name = "Precio unitario")]
+            [Required(ErrorMessage = "Este campo es obligatorio.")]
+            [Range(0, 9999999999999999.99)]
+            public decimal? PrecioUnitario { get; set; }
+
+            [Display(Name = "ID Producto")]
+            [Required(ErrorMessage = "Este campo es obligatorio.")]
+            public int? IdProducto { get; set; }
+
+            public virtual ICollection<Ventas> Ventas { get; set; }
+        }
+
     }
-    public class VentasMetadata
-    {
-        [Display(Name = "ClientId")]
-        [Required(ErrorMessage = "El campo ClientId es obligatorio.")]
-        public int ClientId { get; set; }
-
-        [Display(Name = "Total")]
-        [Required(ErrorMessage = "El campo Total es obligatorio.")]
-        public decimal Total { get; set; }
-
-        [Display(Name = "Fecha")]
-        [DataType(DataType.Date)]
-        [Required(ErrorMessage = "El campo Fecha es obligatorio.")]
-        public DateTime Fecha { get; set; }
-
-        [Display(Name = "Descripcion")]
-        [DataType(DataType.Text)]
-        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
-        public string Descripcion { get; set; }
-
-        [Display(Name = "IdVentasDetalle")]
-        [Required(ErrorMessage = "El campo IdVentasDetalle es obligatorio.")]
-        public int IdVentasDetalle { get; set; }
-
-    }
+   
 
     public partial class PersonaLogMetadata
     {
