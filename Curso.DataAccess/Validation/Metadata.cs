@@ -37,6 +37,60 @@ namespace Curso.DataAccess.Validations
 
 
         }
+        public partial class CategoriaProductosMetadata
+        {
+            public int IdCategoriaProductos { get; set; }
+
+            [Display(Name = "Nombre")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
+
+            [Display(Name = "Categoria")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Categoria { get; set; }
+        }
+
+        public partial class ClientesLogMetadata
+        {
+
+            [Display(Name = "Apellido del cliente")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(20, ErrorMessage = "Máximo {1} caracteres")]
+            public string Apellido { get; set; }
+
+            [Display(Name = "Nombre del cliente")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(20, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
+
+            [Display(Name = "Direccion")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(200, ErrorMessage = "Máximo {1} caracteres")]
+            public string Direccion { get; set; }
+
+            [EmailAddress]
+            [Display(Name = "Email")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(30, ErrorMessage = "Máximo {1} caracteres")]
+            public string Email { get; set; }
+
+            [Display(Name = "Tipo de Cliente")]
+            public int ClienteTipoId { get; set; }
+
+            [Display(Name = "Categoria del Cliente")]
+            public int ClienteCategoriaId { get; set; }
+
+            [Display(Name = "Cliente")]
+            public int IdCliente { get; set; }
+
+            [Display(Name = "Usuario")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(450, ErrorMessage = "Máximo {1} caracteres")]
+            public string IdUsuario { get; set; }
+
+        }
 
         public partial class ProductosMetadata
         {
