@@ -30,11 +30,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdProductoTipo" class="control-label"></label>
-                <select asp-for="IdProductoTipo" class ="form-control" asp-items="ViewBag.IdProductoTipo"></select>
+                <select asp-for="IdProductoTipo" class="form-control" asp-items="ViewBag.IdProductoTipo"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdProductoCategoria" class="control-label"></label>
-                <select asp-for="IdProductoCategoria" class ="form-control" asp-items="ViewBag.IdProductoCategoria"></select>
+                <select asp-for="IdProductoCategoria" onchange="changeCategoriaProducto();" class="form-control" asp-items="ViewBag.IdProductoCategoria"></select>
+
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" id="txtDePrueba" value="">
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -50,3 +55,25 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+<script type="text/javascript">
+    function changeCategoriaProducto() {
+        $.ajax(
+            {
+                url: "/CategoriaProductos/GetById",
+                data: { "id": $("#IdProductoCategoria").val() },
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                cache: false,
+                success: function (data) {
+                    if (data != "") {
+                        $("#txtDePrueba").val(data);
+                        //alert(data);
+                    }
+                }
+            }
+        );
+    }
+</script>

@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 navbar-custom">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Curso.Web</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -29,59 +29,43 @@
                         </li>
                         @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrador")))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
+                            <li id="paneladmin" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">Administración</a>
+                                <div class="dropdown-menu hideshowontop hidetop" aria-labelledby="navbarDropdown">
+                                    <ul class="dropdown nav-item parent-sub-menu">
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated)
-
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="CategoriaProductos" asp-action="Index">Categoria de Productos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="FormaDePago" asp-action="Index">Forma de Pago</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ClientesLogs" asp-action="Index">ClientesLog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ProveedoresCategorias" asp-action="Index">ProveedoresCategorias</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Compras" asp-action="Index">Compras</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ClienteTipoes" asp-action="Index">ClienteTipo</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ProductoTipo" asp-action="Index">ProductoTipo</a>
-                            </li>
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ComprasDetalles" asp-action="Index">Detalles de Compra</a>
-                            </li>
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Ventas" asp-action="Index">Ventas</a>
-                            </li>
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="VentasDetalles" asp-action="Index">Detalles Ventas</a>
-                            </li>
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="PersonaLogs" asp-action="Index">PersonaLogs</a>
-                            </li>
+                            <li id="paneladmin" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">ABM Maestros</a>
+                                <div class="dropdown-menu hideshowontop hidetop" aria-labelledby="navbarDropdown">
+                                    <ul class="dropdown nav-item parent-sub-menu">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="CategoriaProductos" asp-action="Index">Categoria de Productos</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="FormaDePago" asp-action="Index">Forma de Pago</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="ClientesLogs" asp-action="Index">ClientesLog</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="ProveedoresCategorias" asp-action="Index">ProveedoresCategorias</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Compras" asp-action="Index">Compras</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="ClienteTipoes" asp-action="Index">ClienteTipo</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="ProductoTipo" asp-action="Index">ProductoTipo</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="ComprasDetalles" asp-action="Index">Detalles de Compra</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Ventas" asp-action="Index">Ventas</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="VentasDetalles" asp-action="Index">Detalles Ventas</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="PersonaLogs" asp-action="Index">PersonaLogs</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>                    
                         }
                     </ul>
                 </div>
