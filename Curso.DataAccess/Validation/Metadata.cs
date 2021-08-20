@@ -112,7 +112,7 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Categoria del Cliente")]
             public int ClienteCategoriaId { get; set; }
 
-            [Display(Name = "Cliente")]
+            [Display(Name = "Cliente Nro")]
             public int IdCliente { get; set; }
 
             [Display(Name = "Usuario")]
