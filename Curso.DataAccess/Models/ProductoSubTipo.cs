@@ -7,19 +7,19 @@ using System.Collections.Generic;
 
 namespace Curso.DataAccess.Models
 {
-    public partial class ProductoTipo
+    public partial class ProductoSubTipo
     {
-        public ProductoTipo()
+        public ProductoSubTipo()
         {
-            ProductoSubTipo = new HashSet<ProductoSubTipo>();
             Productos = new HashSet<Productos>();
         }
 
-        public int IdProductoTipo { get; set; }
+        public int Id { get; set; }
         public string Descripcion { get; set; }
         public string Nombre { get; set; }
+        public int IdProductoTipo { get; set; }
 
-        public virtual ICollection<ProductoSubTipo> ProductoSubTipo { get; set; }
+        public virtual ProductoTipo IdProductoTipoNavigation { get; set; }
         public virtual ICollection<Productos> Productos { get; set; }
     }
 }

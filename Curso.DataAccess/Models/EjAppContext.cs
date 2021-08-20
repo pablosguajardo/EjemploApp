@@ -37,6 +37,7 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<PersonaLog> PersonaLog { get; set; }
         public virtual DbSet<Personas> Personas { get; set; }
         public virtual DbSet<PersonasTipo> PersonasTipo { get; set; }
+        public virtual DbSet<ProductoSubTipo> ProductoSubTipo { get; set; }
         public virtual DbSet<ProductoTipo> ProductoTipo { get; set; }
         public virtual DbSet<Productos> Productos { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
@@ -360,6 +361,21 @@ namespace Curso.DataAccess.Models
                     .HasMaxLength(50);
             });
 
+            modelBuilder.Entity<ProductoSubTipo>(entity =>
+            {
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Nombre).HasMaxLength(50);
+
+                entity.HasOne(d => d.IdProductoTipoNavigation)
+                    .WithMany(p => p.ProductoSubTipo)
+                    .HasForeignKey(d => d.IdProductoTipo)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductoSubTipo_ProductoTipo");
+            });
+
             modelBuilder.Entity<ProductoTipo>(entity =>
             {
                 entity.HasKey(e => e.IdProductoTipo);
@@ -367,6 +383,8 @@ namespace Curso.DataAccess.Models
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Nombre).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Productos>(entity =>
@@ -386,6 +404,11 @@ namespace Curso.DataAccess.Models
                     .HasForeignKey(d => d.IdProductoCategoria)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Productos_CategoriaProducto");
+
+                entity.HasOne(d => d.IdProductoSubTipoNavigation)
+                    .WithMany(p => p.Productos)
+                    .HasForeignKey(d => d.IdProductoSubTipo)
+                    .HasConstraintName("FK_Productos_ProductoSubTipo");
 
                 entity.HasOne(d => d.IdProductoTipoNavigation)
                     .WithMany(p => p.Productos)
