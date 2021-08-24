@@ -308,6 +308,22 @@ namespace Curso.DataAccess.Validations
             public string CategoriaId { get; set; }
         }
 
+        public partial class ComprasMetadata
+        {
+            [Display(Name = "Numero de Compra")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [Range(0, 9999999)]
+            public int? NroCompra { get; set; }
+
+            [Display(Name = "Punto de Venta")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [DataType(DataType.Text)]
+            [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+            public string PuntoDeVenta { get; set; }
+ 
+
+        }
+
 
     }
 
@@ -337,6 +353,8 @@ namespace Curso.DataAccess.Validations
 
         
     }
+
+ 
 
 
 }
