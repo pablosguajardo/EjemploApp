@@ -354,7 +354,24 @@ namespace Curso.DataAccess.Validations
         
     }
 
- 
+    public partial class ProductoTipo
+    {
+
+        public int IdProductoTipo { get; set; }
+
+        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+        public string Nombre { get; set; }
+
+    }
+
+
 
 
 }
