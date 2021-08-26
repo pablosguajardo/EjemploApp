@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Curso.DataAccess.Validations;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -75,6 +76,11 @@ namespace Curso.DataAccess.Models
 
     [ModelMetadataType(typeof(ComprasDetalleMetadata))]
     public partial class ComprasDetalleMetadata
+    {
+    }
+
+    [ModelMetadataType(typeof(FormaDePagoMetadata))]
+    public partial class FormaDePago
     {
     }
 }

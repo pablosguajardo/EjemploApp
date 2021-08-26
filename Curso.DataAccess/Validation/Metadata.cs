@@ -384,4 +384,16 @@ namespace Curso.DataAccess.Validations
 
     }
 
+    public partial class FormaDePagoMetadata
+    {
+        public int Id { get; set; }
+
+        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+        public string Descripción { get; set; }
+
+        public virtual ICollection<Compras> Compras { get; set; }
+
+    }
 }
