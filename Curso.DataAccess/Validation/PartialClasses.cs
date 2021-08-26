@@ -73,5 +73,8 @@ namespace Curso.DataAccess.Models
     {
     }
 
-
+    [ModelMetadataType(typeof(ComprasDetalleMetadata))]
+    public partial class ComprasDetalleMetadata
+    {
+    }
 }

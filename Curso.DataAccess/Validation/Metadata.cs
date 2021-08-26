@@ -320,8 +320,8 @@ namespace Curso.DataAccess.Validations
             [DataType(DataType.Text)]
             [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
             public string PuntoDeVenta { get; set; }
- 
 
+            
         }
 
 
@@ -372,6 +372,16 @@ namespace Curso.DataAccess.Validations
     }
 
 
+    public partial class ComprasDetalleMetadata
+    {
 
+        public int IdComprasDetalle { get; set; }
+
+        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+        public string Descripcion { get; set; }
+
+    }
 
 }
