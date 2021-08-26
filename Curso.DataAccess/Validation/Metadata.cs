@@ -53,6 +53,35 @@ namespace Curso.DataAccess.Validations
             public string Categoria { get; set; }
         }
 
+        public partial class ClientesMetaData
+        {
+            [Display(Name = "Apellido")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(100, ErrorMessage = "Máximo {1} caracteres")]
+            public string Apellido { get; set; }
+
+            [Display(Name = "Nombre")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(100, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
+
+            [Display(Name = "Dirección")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(100, ErrorMessage = "Máximo {1} caracteres")]
+            public string Direccion { get; set; }
+
+            [EmailAddress]
+            [Display(Name = "Email")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(30, ErrorMessage = "Máximo {1} caracteres")]
+            public string Email { get; set; }
+
+            [Display(Name = "Tipo de Cliente")]
+            public int ClienteTipoId { get; set; }
+
+            [Display(Name = "Categoria de Cliente")]
+            public int ClienteCategoriaId { get; set; }
+        }
         public partial class ClientesLogMetadata
         {
 
@@ -83,7 +112,7 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Categoria del Cliente")]
             public int ClienteCategoriaId { get; set; }
 
-            [Display(Name = "Cliente")]
+            [Display(Name = "Cliente Nro")]
             public int IdCliente { get; set; }
 
             [Display(Name = "Usuario")]
@@ -179,6 +208,24 @@ namespace Curso.DataAccess.Validations
             public bool LockoutEnabled { get; set; }
             public int AccessFailedCount { get; set; }
         }
+
+        public partial class ProveedoresMetadata
+        {
+            [Display(Name = "Nombre")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
+            [Display(Name = "Fecha de inscripcion")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [DataType(DataType.Date)]
+            public DateTime FechaInscripcion { get; set; }
+            [Display(Name = "Tipo")]
+            public int IdTipoProveedores { get; set; }
+            [Display(Name = "Categoria")]
+            public int IdCategoriaProveedores { get; set; }
+
+        }
+        
         public partial class ProveedoresCategoriaMetadata
         {
             [Display(Name = "Nombre de la categoria")]
@@ -247,8 +294,39 @@ namespace Curso.DataAccess.Validations
             public virtual ICollection<Ventas> Ventas { get; set; }
         }
 
+        public partial class ClienteTipoMetadata
+
+        {
+            [Display(Name = "Descripcion")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Descripcion { get; set; }
+
+            [Display(Name = "Categoria_ID")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string CategoriaId { get; set; }
+        }
+
+        public partial class ComprasMetadata
+        {
+            [Display(Name = "Numero de Compra")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [Range(0, 9999999)]
+            public int? NroCompra { get; set; }
+
+            [Display(Name = "Punto de Venta")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [DataType(DataType.Text)]
+            [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+            public string PuntoDeVenta { get; set; }
+ 
+
+        }
+
+
     }
-   
+
 
     public partial class PersonaLogMetadata
     {
@@ -275,6 +353,8 @@ namespace Curso.DataAccess.Validations
 
         
     }
+
+ 
 
 
 }

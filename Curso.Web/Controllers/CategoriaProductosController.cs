@@ -145,6 +145,21 @@ namespace Curso.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public JsonResult GetById(int id)
+        {
+            var tipo = _context.CategoriaProducto
+               .FirstOrDefault(m => m.IdCategoriaProducto == id);
+            if (tipo == null)
+            {
+                return Json("");
+            }
+            else
+            {
+                return Json(tipo.Nombre);
+            }
+        }
+
+
         private bool CategoriaProductoExists(int id)
         {
             return _context.CategoriaProducto.Any(e => e.IdCategoriaProducto == id);
