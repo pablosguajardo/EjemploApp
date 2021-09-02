@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Curso.DataAccess.Validations;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,6 +15,14 @@ namespace Curso.DataAccess.Models
     public partial class Personas
     {
     }
+    [ModelMetadataType(typeof(CategoriaProductosMetadata))]
+    public partial class CategoriaProductos
+    {
+    }
+    [ModelMetadataType(typeof(ClientesLogMetadata))]
+    public partial class ClientesLog
+    {
+    }
 
     [ModelMetadataType(typeof(ProductosMetadata))]
     public partial class Productos
@@ -22,6 +31,11 @@ namespace Curso.DataAccess.Models
 
     [ModelMetadataType(typeof(ProductoTipoMetadata))]
     public partial class ProductoTipo
+    {
+    }
+
+    [ModelMetadataType(typeof(ProveedoresMetadata))]
+    public partial class Proveedores
     {
     }
 
@@ -35,4 +49,38 @@ namespace Curso.DataAccess.Models
     {
     }
 
+    [ModelMetadataType(typeof(VentasMetadata))]
+    public partial class Ventas
+    {
+    }
+
+    [ModelMetadataType(typeof(VentasDetalleMetadata))]
+    public partial class VentasDetalle
+    {
+    }
+
+    [ModelMetadataType(typeof(PersonaLog))]
+    public partial class PersonaLog
+    {
+    }
+
+    [ModelMetadataType(typeof(ClienteTipoMetadata))]
+    public partial class ClienteTipo
+    {
+    }
+
+    [ModelMetadataType(typeof(ComprasMetadata))]
+    public partial class Compras
+    {
+    }
+
+    [ModelMetadataType(typeof(ComprasDetalleMetadata))]
+    public partial class ComprasDetalleMetadata
+    {
+    }
+
+    [ModelMetadataType(typeof(FormaDePagoMetadata))]
+    public partial class FormaDePago
+    {
+    }
 }
