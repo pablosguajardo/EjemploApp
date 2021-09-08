@@ -36,6 +36,7 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<Logs> Logs { get; set; }
         public virtual DbSet<PersonaLog> PersonaLog { get; set; }
         public virtual DbSet<Personas> Personas { get; set; }
+        public virtual DbSet<PersonasSubTipo> PersonasSubTipo { get; set; }
         public virtual DbSet<PersonasTipo> PersonasTipo { get; set; }
         public virtual DbSet<ProductoSubTipo> ProductoSubTipo { get; set; }
         public virtual DbSet<ProductoTipo> ProductoTipo { get; set; }
@@ -285,6 +286,8 @@ namespace Curso.DataAccess.Models
                     .HasColumnName("idComprasDetalle")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
+
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasColumnName("descripcion")
@@ -339,17 +342,41 @@ namespace Curso.DataAccess.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
+
                 entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
+
+                entity.Property(e => e.IdSubTipoPersona).HasColumnName("idSubTipoPersona");
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.HasOne(d => d.IdSubTipoPersonaNavigation)
+                    .WithMany(p => p.Personas)
+                    .HasForeignKey(d => d.IdSubTipoPersona)
+                    .HasConstraintName("FK_Personas_PersonasSubTipo");
 
                 entity.HasOne(d => d.IdTipoPersonaNavigation)
                     .WithMany(p => p.Personas)
                     .HasForeignKey(d => d.IdTipoPersona)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Personas_PersonasTipo");
+            });
+
+            modelBuilder.Entity<PersonasSubTipo>(entity =>
+            {
+                entity.Property(e => e.Descripcion).HasMaxLength(50);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.IdPersonasTipoNavigation)
+                    .WithMany(p => p.PersonasSubTipo)
+                    .HasForeignKey(d => d.IdPersonasTipo)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PersonasSubTipo_PersonasTipo");
             });
 
             modelBuilder.Entity<PersonasTipo>(entity =>

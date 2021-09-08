@@ -16,6 +16,7 @@ namespace Curso.DataAccess.Models
 
         public int IdComprasDetalle { get; set; }
         public string Descripcion { get; set; }
+        public bool? Borrado { get; set; }
 
         public virtual ICollection<Compras> Compras { get; set; }
     }

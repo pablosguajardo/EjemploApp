@@ -14,6 +14,7 @@ namespace Curso.DataAccess.Models
         public DateTime FechaInscripcion { get; set; }
         public int IdTipoProveedores { get; set; }
         public int IdCategoriaProveedores { get; set; }
+        public bool? Borrado { get; set; }
 
         public virtual ProveedoresCategoria IdCategoriaProveedoresNavigation { get; set; }
     }

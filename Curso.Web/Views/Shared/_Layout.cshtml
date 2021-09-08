@@ -43,6 +43,9 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ProveedoresCategorias" asp-action="Index">Categoria de proveedores</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="FormaDePago" asp-action="Index">Forma de Pago</a>
                             </li>
                             <li class="nav-item">
@@ -56,9 +59,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ProveedoresCategorias" asp-action="Index">ProveedoresCategorias</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Compras" asp-action="Index">Compras</a>
@@ -86,6 +86,7 @@
                             </li>
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="PersonaLogs" asp-action="Index">PersonaLogs</a>
+                            </li>
                             <li id="paneladmin" class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle page-scroll" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">ABM Maestros</a>
                                 <div class="dropdown-menu hideshowontop hidetop" aria-labelledby="navbarDropdown">

@@ -20,7 +20,10 @@ namespace Curso.DataAccess.Models
         public int? Hermanos { get; set; }
         public DateTime FechaDeNacimiento { get; set; }
         public int IdTipoPersona { get; set; }
+        public int? IdSubTipoPersona { get; set; }
+        public bool? Borrado { get; set; }
 
+        public virtual PersonasSubTipo IdSubTipoPersonaNavigation { get; set; }
         public virtual PersonasTipo IdTipoPersonaNavigation { get; set; }
         public virtual ICollection<PersonaLog> PersonaLog { get; set; }
     }
