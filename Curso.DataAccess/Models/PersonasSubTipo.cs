@@ -7,16 +7,19 @@ using System.Collections.Generic;
 
 namespace Curso.DataAccess.Models
 {
-    public partial class Proveedores
+    public partial class PersonasSubTipo
     {
+        public PersonasSubTipo()
+        {
+            Personas = new HashSet<Personas>();
+        }
+
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public DateTime FechaInscripcion { get; set; }
-        public int IdTipoProveedores { get; set; }
-        public int IdCategoriaProveedores { get; set; }
-        public bool? Borrado { get; set; }
-        public string Domicilio { get; set; }
+        public string Descripcion { get; set; }
+        public int IdPersonasTipo { get; set; }
 
-        public virtual ProveedoresCategoria IdCategoriaProveedoresNavigation { get; set; }
+        public virtual PersonasTipo IdPersonasTipoNavigation { get; set; }
+        public virtual ICollection<Personas> Personas { get; set; }
     }
 }

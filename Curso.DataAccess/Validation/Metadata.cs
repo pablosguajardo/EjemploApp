@@ -36,6 +36,10 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Tipo")]
             public int IdTipoPersonaNavigation { get; set; }
 
+            [Display(Name = "Dirección")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Direccion { get; set; }
 
         }
         public partial class CategoriaProductosMetadata

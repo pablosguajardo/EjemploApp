@@ -16,6 +16,7 @@ namespace Curso.DataAccess.Models
         public int IdProductoTipo { get; set; }
         public int IdProductoCategoria { get; set; }
         public int? IdProductoSubTipo { get; set; }
+        public bool? Borrado { get; set; }
 
         public virtual CategoriaProducto IdProductoCategoriaNavigation { get; set; }
         public virtual ProductoSubTipo IdProductoSubTipoNavigation { get; set; }

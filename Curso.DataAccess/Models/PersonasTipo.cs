@@ -12,6 +12,7 @@ namespace Curso.DataAccess.Models
         public PersonasTipo()
         {
             Personas = new HashSet<Personas>();
+            PersonasSubTipo = new HashSet<PersonasSubTipo>();
         }
 
         public int Id { get; set; }
@@ -19,5 +20,6 @@ namespace Curso.DataAccess.Models
         public string Descripcion { get; set; }
 
         public virtual ICollection<Personas> Personas { get; set; }
+        public virtual ICollection<PersonasSubTipo> PersonasSubTipo { get; set; }
     }
 }
