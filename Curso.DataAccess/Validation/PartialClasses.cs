@@ -34,6 +34,11 @@ namespace Curso.DataAccess.Models
     {
     }
 
+    [ModelMetadataType(typeof(ProveedoresMetadata))]
+    public partial class Proveedores
+    {
+    }
+
     [ModelMetadataType(typeof(ProveedoresCategoriaMetadata))]
     public partial class ProveedoresCategoria
     {
@@ -46,6 +51,36 @@ namespace Curso.DataAccess.Models
 
     [ModelMetadataType(typeof(VentasMetadata))]
     public partial class Ventas
+    {
+    }
+
+    [ModelMetadataType(typeof(VentasDetalleMetadata))]
+    public partial class VentasDetalle
+    {
+    }
+
+    [ModelMetadataType(typeof(PersonaLog))]
+    public partial class PersonaLog
+    {
+    }
+
+    [ModelMetadataType(typeof(ClienteTipoMetadata))]
+    public partial class ClienteTipo
+    {
+    }
+
+    [ModelMetadataType(typeof(ComprasMetadata))]
+    public partial class Compras
+    {
+    }
+
+    [ModelMetadataType(typeof(ComprasDetalleMetadata))]
+    public partial class ComprasDetalleMetadata
+    {
+    }
+
+    [ModelMetadataType(typeof(FormaDePagoMetadata))]
+    public partial class FormaDePago
     {
     }
 }

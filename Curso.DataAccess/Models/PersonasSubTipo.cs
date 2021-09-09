@@ -7,19 +7,19 @@ using System.Collections.Generic;
 
 namespace Curso.DataAccess.Models
 {
-    public partial class PersonasTipo
+    public partial class PersonasSubTipo
     {
-        public PersonasTipo()
+        public PersonasSubTipo()
         {
             Personas = new HashSet<Personas>();
-            PersonasSubTipo = new HashSet<PersonasSubTipo>();
         }
 
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+        public int IdPersonasTipo { get; set; }
 
+        public virtual PersonasTipo IdPersonasTipoNavigation { get; set; }
         public virtual ICollection<Personas> Personas { get; set; }
-        public virtual ICollection<PersonasSubTipo> PersonasSubTipo { get; set; }
     }
 }
