@@ -221,6 +221,8 @@ namespace Curso.DataAccess.Models
                     .HasMaxLength(20)
                     .IsFixedLength();
 
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
+
                 entity.Property(e => e.Direccion)
                     .HasMaxLength(200)
                     .IsFixedLength();
@@ -253,6 +255,8 @@ namespace Curso.DataAccess.Models
                 entity.HasKey(e => e.IdCompras);
 
                 entity.Property(e => e.IdCompras).HasColumnName("idCompras");
+
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
 
                 entity.Property(e => e.FechaCompra)
                     .HasColumnName("Fecha_compra")
