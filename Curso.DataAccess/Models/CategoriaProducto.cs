@@ -17,6 +17,7 @@ namespace Curso.DataAccess.Models
         public int IdCategoriaProducto { get; set; }
         public string Nombre { get; set; }
         public string Categoria { get; set; }
+        public bool? Borrado { get; set; }
 
         public virtual ICollection<Productos> Productos { get; set; }
     }
