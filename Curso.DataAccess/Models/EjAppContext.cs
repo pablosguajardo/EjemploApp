@@ -192,6 +192,8 @@ namespace Curso.DataAccess.Models
                     .HasMaxLength(20)
                     .IsFixedLength();
 
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
+
                 entity.Property(e => e.Direccion)
                     .HasMaxLength(200)
                     .IsFixedLength();
