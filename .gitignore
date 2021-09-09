@@ -35,3 +35,4 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+/Curso.DataAccess/Models/aspnet53bc9b9d9d6a45d484292a2761773502Context.cs
