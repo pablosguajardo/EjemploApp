@@ -21,6 +21,7 @@ namespace Curso.DataAccess.Models
         public string Email { get; set; }
         public int ClienteTipoId { get; set; }
         public int ClienteCategoriaId { get; set; }
+        public bool? Borrado { get; set; }
 
         public virtual ClienteTipo ClienteTipo { get; set; }
         public virtual ICollection<ClientesLog> ClientesLog { get; set; }
