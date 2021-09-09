@@ -15,6 +15,7 @@ namespace Curso.DataAccess.Models
         public string PuntoDeVenta { get; set; }
         public int? IdCompraDetalle { get; set; }
         public int? Idformapago { get; set; }
+        public bool? Borrado { get; set; }
 
         public virtual ComprasDetalle IdCompraDetalleNavigation { get; set; }
         public virtual FormaDePago IdformapagoNavigation { get; set; }

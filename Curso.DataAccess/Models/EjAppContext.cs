@@ -254,6 +254,8 @@ namespace Curso.DataAccess.Models
 
                 entity.Property(e => e.IdCompras).HasColumnName("idCompras");
 
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
+
                 entity.Property(e => e.FechaCompra)
                     .HasColumnName("Fecha_compra")
                     .IsRowVersion()
