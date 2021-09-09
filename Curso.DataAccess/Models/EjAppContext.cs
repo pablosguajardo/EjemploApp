@@ -407,11 +407,15 @@ namespace Curso.DataAccess.Models
             {
                 entity.HasKey(e => e.IdProductoTipo);
 
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
+
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Nombre).HasMaxLength(50);
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Productos>(entity =>
@@ -477,6 +481,8 @@ namespace Curso.DataAccess.Models
 
             modelBuilder.Entity<Stock>(entity =>
             {
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
+
                 entity.Property(e => e.Stock1).HasColumnName("Stock");
             });
 
