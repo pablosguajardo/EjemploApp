@@ -325,7 +325,12 @@ namespace Curso.DataAccess.Validations
             [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
             public string PuntoDeVenta { get; set; }
 
-            
+            [Display(Name = "Fecha")]
+            [DataType(DataType.Date)]
+            [Required(ErrorMessage = "El campo Fecha de Compra es obligatorio.")]
+            public DateTime FechaCompra { get; set; }
+
+
         }
 
 

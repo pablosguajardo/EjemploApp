@@ -260,8 +260,7 @@ namespace Curso.DataAccess.Models
 
                 entity.Property(e => e.FechaCompra)
                     .HasColumnName("Fecha_compra")
-                    .IsRowVersion()
-                    .IsConcurrencyToken();
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.IdCompraDetalle).HasColumnName("idCompraDetalle");
 
@@ -498,6 +497,8 @@ namespace Curso.DataAccess.Models
 
             modelBuilder.Entity<Ventas>(entity =>
             {
+                entity.Property(e => e.ClientName).HasMaxLength(50);
+
                 entity.Property(e => e.Descripcion).HasMaxLength(50);
 
                 entity.Property(e => e.Fecha).HasColumnType("datetime");
