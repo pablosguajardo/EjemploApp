@@ -54,10 +54,11 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion,CategoriaId")] ClienteTipo clienteTipo)
+        public async Task<IActionResult> Create([Bind("Id,Descripcion,CategoriaId,Detalles,Borrado")] ClienteTipo clienteTipo)
         {
             if (ModelState.IsValid)
             {
+                clienteTipo.Borrado = false;
                 _context.Add(clienteTipo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +87,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,CategoriaId")] ClienteTipo clienteTipo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,CategoriaId,Detalles,Borrado")] ClienteTipo clienteTipo)
         {
             if (id != clienteTipo.Id)
             {
@@ -95,6 +96,7 @@ namespace Curso.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                clienteTipo.Borrado = false;
                 try
                 {
                     _context.Update(clienteTipo);

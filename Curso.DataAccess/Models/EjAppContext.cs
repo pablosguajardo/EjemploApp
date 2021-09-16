@@ -173,16 +173,16 @@ namespace Curso.DataAccess.Models
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CategoriaId)
-                    .IsRequired()
-                    .HasColumnName("Categoria_ID")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                entity.Property(e => e.CategoriaId).HasColumnName("Categoria_ID");
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Detalles)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Clientes>(entity =>
