@@ -96,7 +96,7 @@ namespace Curso.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCompras,NroCompra,FechaCompra,PuntoDeVenta,IdCompraDetalle,Idformapago")] Compras compras)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCompras,NroCompra,FechaCompra,PuntoDeVenta,IdCompraDetalle,Idformapago,Borrado")] Compras compras)
         {
             if (id != compras.IdCompras)
             {

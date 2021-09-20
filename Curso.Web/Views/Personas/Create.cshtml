@@ -52,8 +52,28 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="IdTipoPersona" class="control-label"></label>
-                        <select asp-for="IdTipoPersona" class="form-control" asp-items="ViewBag.IdTipoPersona"></select>
+                        <select asp-for="IdTipoPersona" onchange="TipoPersona();" class="form-control" asp-items="ViewBag.IdTipoPersona"></select>
                     </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="IdSubTipoPersona" class="control-label"></label>
+                        <select asp-for="IdSubTipoPersona" class="form-control" asp-items="ViewBag.IdSubTipoPersona"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Direccion" class="control-label"></label>
+                        <input asp-for="Direccion" class="form-control" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
                 </div>
             </div>
             <div class="row">
@@ -76,3 +96,33 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+<script type="text/javascript">
+
+
+    function TipoPersona() {
+        $.ajax
+            ({
+                url: '/PersonasSubTipo/GetSubTipo',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                data: {
+                    "Id": $("#IdTipoPersona").val(),
+                    "selectedIdValue": 0
+                },
+                datatype: "json",
+                cache: false,
+                success: function (result) {
+                    $("#IdSubTipoPersona").html("");
+                    $.each(result, function (i, subTipo) {
+                        $("#IdSubTipoPersona").append($('<option ></option>').val(subTipo.value).html(subTipo.text));
+                    });
+                },
+                error: function () {
+                    //alert("Whooaaa! Something went wrong..")
+                }
+            });
+
+    }
+</script>

@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Curso.DataAccess.Models.Proveedores>
+﻿@model IEnumerable<Curso.DataAccess.Models.PersonasSubTipo>
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Index</h1>
@@ -16,16 +17,10 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaInscripcion)
+                @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdTipoProveedores)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Borrado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCategoriaProveedoresNavigation)
+                @Html.DisplayNameFor(model => model.IdPersonasTipoNavigation)
             </th>
             <th></th>
         </tr>
@@ -37,16 +32,10 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaInscripcion)
+                @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdTipoProveedores)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Borrado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCategoriaProveedoresNavigation.NombreCategoria)
+                @Html.DisplayFor(modelItem => item.IdPersonasTipoNavigation.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

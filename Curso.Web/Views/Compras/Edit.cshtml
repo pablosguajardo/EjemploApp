@@ -15,25 +15,43 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdCompras" />
             <div class="form-group">
-                <label asp-for="NroCompra" class="control-label"></label>
+                <label asp-for="NroCompra" class="control-label">NroCompra</label>
                 <input asp-for="NroCompra" class="form-control" />
                 <span asp-validation-for="NroCompra" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PuntoDeVenta" class="control-label"></label>
+                <label asp-for="FechaCompra" class="control-label">Fecha de Compra</label>
+                <input asp-for="FechaCompra" class="form-control" />
+                <span asp-validation-for="FechaCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PuntoDeVenta" class="control-label">Punto de Venta</label>
                 <input asp-for="PuntoDeVenta" class="form-control" />
                 <span asp-validation-for="PuntoDeVenta" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdCompraDetalle" class="control-label"></label>
+                <label asp-for="IdCompraDetalle" class="control-label">Detalle de Compra</label>
                 <select asp-for="IdCompraDetalle" class="form-control" asp-items="ViewBag.IdCompraDetalle"></select>
                 <span asp-validation-for="IdCompraDetalle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Idformapago" class="control-label"></label>
+                <label asp-for="Idformapago" class="control-label">Forma de Pago</label>
                 <select asp-for="Idformapago" class="form-control" asp-items="ViewBag.Idformapago"></select>
                 <span asp-validation-for="Idformapago" class="text-danger"></span>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">
+                        @Html.DisplayNameFor(model => model.Borrado)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        @Html.CheckBox("Borrado", Model.Borrado.GetValueOrDefault(), new { @class = "" })
+                    </label>
+                </div>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
