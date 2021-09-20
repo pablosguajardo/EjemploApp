@@ -173,16 +173,16 @@ namespace Curso.DataAccess.Models
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CategoriaId)
-                    .IsRequired()
-                    .HasColumnName("Categoria_ID")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                entity.Property(e => e.CategoriaId).HasColumnName("Categoria_ID");
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Detalles)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Clientes>(entity =>
@@ -191,6 +191,8 @@ namespace Curso.DataAccess.Models
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsFixedLength();
+
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
 
                 entity.Property(e => e.Direccion)
                     .HasMaxLength(200)
@@ -218,6 +220,8 @@ namespace Curso.DataAccess.Models
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsFixedLength();
+
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
 
                 entity.Property(e => e.Direccion)
                     .HasMaxLength(200)
@@ -252,10 +256,11 @@ namespace Curso.DataAccess.Models
 
                 entity.Property(e => e.IdCompras).HasColumnName("idCompras");
 
+                entity.Property(e => e.Borrado).HasColumnName("borrado");
+
                 entity.Property(e => e.FechaCompra)
                     .HasColumnName("Fecha_compra")
-                    .IsRowVersion()
-                    .IsConcurrencyToken();
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.IdCompraDetalle).HasColumnName("idCompraDetalle");
 
@@ -344,6 +349,8 @@ namespace Curso.DataAccess.Models
 
                 entity.Property(e => e.Borrado).HasColumnName("borrado");
 
+                entity.Property(e => e.Direccion).HasMaxLength(50);
+
                 entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
 
                 entity.Property(e => e.IdSubTipoPersona).HasColumnName("idSubTipoPersona");
@@ -409,6 +416,11 @@ namespace Curso.DataAccess.Models
 
                 entity.Property(e => e.Borrado).HasColumnName("borrado");
 
+                entity.Property(e => e.CampoNuevo)
+                    .IsRequired()
+                    .HasColumnName("campoNuevo")
+                    .HasMaxLength(50);
+
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -450,6 +462,8 @@ namespace Curso.DataAccess.Models
 
             modelBuilder.Entity<Proveedores>(entity =>
             {
+                entity.Property(e => e.Domicilio).HasMaxLength(50);
+
                 entity.Property(e => e.FechaInscripcion).HasColumnType("date");
 
                 entity.Property(e => e.Nombre)
@@ -488,6 +502,8 @@ namespace Curso.DataAccess.Models
 
             modelBuilder.Entity<Ventas>(entity =>
             {
+                entity.Property(e => e.ClientName).HasMaxLength(50);
+
                 entity.Property(e => e.Descripcion).HasMaxLength(50);
 
                 entity.Property(e => e.Fecha).HasColumnType("datetime");

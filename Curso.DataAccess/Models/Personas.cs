@@ -22,6 +22,7 @@ namespace Curso.DataAccess.Models
         public int IdTipoPersona { get; set; }
         public int? IdSubTipoPersona { get; set; }
         public bool? Borrado { get; set; }
+        public string Direccion { get; set; }
 
         public virtual PersonasSubTipo IdSubTipoPersonaNavigation { get; set; }
         public virtual PersonasTipo IdTipoPersonaNavigation { get; set; }
