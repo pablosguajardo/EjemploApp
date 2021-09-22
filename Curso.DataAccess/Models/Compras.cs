@@ -10,8 +10,8 @@ namespace Curso.DataAccess.Models
     public partial class Compras
     {
         public int IdCompras { get; set; }
-        public int? NroCompra { get; set; }
-        public byte[] FechaCompra { get; set; }
+        public int NroCompra { get; set; }
+        public DateTime FechaCompra { get; set; }
         public string PuntoDeVenta { get; set; }
         public int? IdCompraDetalle { get; set; }
         public int? Idformapago { get; set; }

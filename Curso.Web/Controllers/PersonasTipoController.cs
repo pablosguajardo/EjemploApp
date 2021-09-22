@@ -53,7 +53,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion")] PersonasTipo personasTipo)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,campoNuevo")] PersonasTipo personasTipo)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion")] PersonasTipo personasTipo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion,campoNuevo")] PersonasTipo personasTipo)
         {
             if (id != personasTipo.Id)
             {

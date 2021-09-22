@@ -10,19 +10,54 @@
 <h4>ClienteTipo</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="CategoriaId" class="control-label"></label>
+                        <input asp-for="CategoriaId" class="form-control" />
+                        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    </div>
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CategoriaId" class="control-label"></label>
-                <input asp-for="CategoriaId" class="form-control" />
-                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Detalles" class="control-label"></label>
+                        <input asp-for="Detalles" class="form-control" />
+                        <span asp-validation-for="Detalles" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">
+                            @Html.DisplayNameFor(model => model.Borrado)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            @Html.CheckBox("Borrado", Model.Borrado.GetValueOrDefault(), new { @class = "" })
+                        </label>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

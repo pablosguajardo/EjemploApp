@@ -49,7 +49,7 @@ namespace Curso.Web.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "CategoriaId");
+            ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "Descripcion");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace Curso.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "CategoriaId", clientes.ClienteTipoId);
+            ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "Descripcion", clientes.ClienteTipoId);
             return View(clientes);
         }
 
@@ -85,7 +85,7 @@ namespace Curso.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "CategoriaId", clientes.ClienteTipoId);
+            ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "Descripcion", clientes.ClienteTipoId);
             return View(clientes);
         }
 
@@ -122,7 +122,7 @@ namespace Curso.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "CategoriaId", clientes.ClienteTipoId);
+            ViewData["ClienteTipoId"] = new SelectList(_context.ClienteTipo, "Id", "Descripcion", clientes.ClienteTipoId);
             return View(clientes);
         }
 
