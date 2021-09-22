@@ -327,6 +327,10 @@ namespace Curso.DataAccess.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Direccion)
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
                 entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
 
                 entity.Property(e => e.Nombre)
@@ -434,6 +438,8 @@ namespace Curso.DataAccess.Models
             {
                 entity.HasKey(e => e.ProductId);
 
+                entity.Property(e => e.Descripcion).HasMaxLength(50);
+
                 entity.Property(e => e.Marca)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -521,6 +527,12 @@ namespace Curso.DataAccess.Models
             {
                 entity.HasKey(e => e.IdDetalleVenta)
                     .HasName("PK_DetalleVenta");
+
+                entity.Property(e => e.Borrado).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.PrecioUnitario).HasColumnType("money");
 
