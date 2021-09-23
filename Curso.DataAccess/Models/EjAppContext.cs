@@ -233,6 +233,8 @@ namespace Curso.DataAccess.Models
 
                 entity.Property(e => e.IdUsuario).HasMaxLength(450);
 
+                entity.Property(e => e.Localidad).HasMaxLength(50);
+
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasMaxLength(20)
@@ -505,13 +507,15 @@ namespace Curso.DataAccess.Models
             {
                 entity.Property(e => e.Borrado).HasColumnName("borrado");
 
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Stock1).HasColumnName("Stock");
             });
 
             modelBuilder.Entity<Ventas>(entity =>
             {
-                entity.Property(e => e.ClientName).HasMaxLength(50);
-
                 entity.Property(e => e.Descripcion).HasMaxLength(50);
 
                 entity.Property(e => e.Fecha).HasColumnType("datetime");
