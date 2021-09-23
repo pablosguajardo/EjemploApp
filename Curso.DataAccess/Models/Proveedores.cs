@@ -15,6 +15,7 @@ namespace Curso.DataAccess.Models
         public int IdTipoProveedores { get; set; }
         public int IdCategoriaProveedores { get; set; }
         public bool? Borrado { get; set; }
+        public string Domicilio { get; set; }
 
         public virtual ProveedoresCategoria IdCategoriaProveedoresNavigation { get; set; }
     }

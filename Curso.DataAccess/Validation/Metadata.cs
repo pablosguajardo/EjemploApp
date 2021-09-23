@@ -120,6 +120,11 @@ namespace Curso.DataAccess.Validations
             [StringLength(450, ErrorMessage = "Máximo {1} caracteres")]
             public string IdUsuario { get; set; }
 
+            [Display(Name = "Localidad")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Localidad { get; set; }
+
         }
 
         public partial class ProductosMetadata

@@ -20,6 +20,8 @@ namespace Curso.DataAccess.Models
         public int IdCompra { get; set; }
         public decimal? PrecioUnitario { get; set; }
         public int? IdProducto { get; set; }
+        public bool? Borrado { get; set; }
+        public string Descripcion { get; set; }
 
         public virtual ICollection<Ventas> Ventas { get; set; }
     }
