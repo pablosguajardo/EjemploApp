@@ -76,7 +76,7 @@ namespace Curso.Web.Controllers
 
                     var log = new Logs();
                     log.IsError = false;
-                    log.Description = "Persona creada";
+                    log.Description = "Persona creada correctamente.";
                     log.Message = $"Persona creada a las {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}";
                     _context.Add(log);
                     await _context.SaveChangesAsync();
