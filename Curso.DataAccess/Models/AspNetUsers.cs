@@ -15,7 +15,6 @@ namespace Curso.DataAccess.Models
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
-            ClientesLog = new HashSet<ClientesLog>();
         }
 
         public string Id { get; set; }
@@ -38,6 +37,5 @@ namespace Curso.DataAccess.Models
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
-        public virtual ICollection<ClientesLog> ClientesLog { get; set; }
     }
 }
