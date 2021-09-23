@@ -53,7 +53,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDetalleVenta,Subtotal,Cantidad,IdCompra,PrecioUnitario,IdProducto")] VentasDetalle ventasDetalle)
+        public async Task<IActionResult> Create([Bind("IdDetalleVenta,Subtotal,Cantidad,IdCompra,PrecioUnitario,IdProducto,Descripcion,Borrado")] VentasDetalle ventasDetalle)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDetalleVenta,Subtotal,Cantidad,IdCompra,PrecioUnitario,IdProducto")] VentasDetalle ventasDetalle)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDetalleVenta,Subtotal,Cantidad,IdCompra,PrecioUnitario,IdProducto,Borrado,Descripcion")] VentasDetalle ventasDetalle)
         {
             if (id != ventasDetalle.IdDetalleVenta)
             {

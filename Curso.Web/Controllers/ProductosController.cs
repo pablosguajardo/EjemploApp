@@ -59,13 +59,35 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Nombre,Marca,Precio,IdProductoTipo,IdProductoCategoria")] Productos productos)
+        public async Task<IActionResult> Create([Bind("ProductId,Nombre,Marca,Precio,IdProductoTipo,IdProductoCategoria,IdProductoSubTipo,Descripcion")] Productos productos)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(productos);
+
+                if (ModelState.IsValid)
+                {
+                    _context.Add(productos);
+                    await _context.SaveChangesAsync();
+
+                    var log = new Logs();
+                    log.IsError = false;
+                    log.Description = "Producto creado";
+                    log.Message = $"Producto creado a las {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}";
+                    _context.Add(log);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            catch (Exception ex)
+            {
+                var log = new Logs();
+                log.IsError = true;
+                log.Description = "error en Create POST";
+                log.Message = $"Error {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}: {ex.ToString()}";
+                _context.Add(log);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
             ViewData["IdProductoCategoria"] = new SelectList(_context.CategoriaProducto, "IdCategoriaProducto", "Categoria", productos.IdProductoCategoria);
             ViewData["IdProductoTipo"] = new SelectList(_context.ProductoTipo, "IdProductoTipo", "Descripcion", productos.IdProductoTipo);
@@ -96,7 +118,7 @@ namespace Curso.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Nombre,Marca,Precio,IdProductoTipo,IdProductoCategoria")] Productos productos)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Nombre,Marca,Precio,IdProductoTipo,IdProductoCategoria,IdProductoSubTipo,Descripcion")] Productos productos)
         {
             if (id != productos.ProductId)
             {

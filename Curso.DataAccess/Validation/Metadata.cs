@@ -149,6 +149,11 @@ namespace Curso.DataAccess.Validations
 
             [Display(Name = "Categoria")]
             public int IdProductoCategoriaNavigation { get; set; }
+
+            [Display(Name = "Descripción")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Descripcion { get; set; }
         }
 
         public partial class ProductoTipoMetadata
@@ -279,13 +284,11 @@ namespace Curso.DataAccess.Validations
             public int IdDetalleVenta { get; set; }
             [Display(Name = "Subtotal")]
             [Required(ErrorMessage = "Este campo es obligatorio.")]
-            [Range(0, 9999999999999999.99)]
-            public decimal Subtotal { get; set; }
+            public double Subtotal { get; set; }
 
             [Display(Name = "Cantidad")]
             [Required(ErrorMessage = "Este campo es obligatorio.")]
             [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-            [Range(0, 2147483647)]
             public int Cantidad { get; set; }
 
             [Display(Name = "ID de compra")]
@@ -294,12 +297,16 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Precio unitario")]
             [Required(ErrorMessage = "Este campo es obligatorio.")]
             [Range(0, 9999999999999999.99)]
-            public decimal? PrecioUnitario { get; set; }
+            public double? PrecioUnitario { get; set; }
 
             [Display(Name = "ID Producto")]
             [Required(ErrorMessage = "Este campo es obligatorio.")]
             public int? IdProducto { get; set; }
 
+            [Required(ErrorMessage = "Este campo es obligatorio.")]
+            public string Descripcion { get; set; }
+
+            public bool Borrado { get; set; }
             public virtual ICollection<Ventas> Ventas { get; set; }
         }
 
