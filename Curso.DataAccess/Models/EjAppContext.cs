@@ -528,6 +528,8 @@ namespace Curso.DataAccess.Models
                 entity.HasKey(e => e.IdDetalleVenta)
                     .HasName("PK_DetalleVenta");
 
+                entity.Property(e => e.Borrado).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Descripcion)
                     .HasMaxLength(50)
                     .IsUnicode(false);
