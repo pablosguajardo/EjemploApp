@@ -237,6 +237,11 @@ namespace Curso.DataAccess.Validations
             public int IdTipoProveedores { get; set; }
             [Display(Name = "Categoria")]
             public int IdCategoriaProveedores { get; set; }
+            [Display(Name = "Domicilio")]
+            [DataType(DataType.Text)]
+            [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+            public string Domicilio { get; set; }
+            public bool Borrado { get; set; }
 
         }
         
