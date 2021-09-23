@@ -15,10 +15,12 @@ namespace Curso.DataAccess.Models
         public int Precio { get; set; }
         public int IdProductoTipo { get; set; }
         public int IdProductoCategoria { get; set; }
-        public int? IdProductoCategoriaNavigationIdCategoriaProducto { get; set; }
-        public int? IdProductoTipoNavigationIdProductoTipo { get; set; }
+        public int? IdProductoSubTipo { get; set; }
+        public bool? Borrado { get; set; }
+        public string Descripcion { get; set; }
 
-        public virtual CategoriaProducto IdProductoCategoriaNavigationIdCategoriaProductoNavigation { get; set; }
-        public virtual ProductoTipo IdProductoTipoNavigationIdProductoTipoNavigation { get; set; }
+        public virtual CategoriaProducto IdProductoCategoriaNavigation { get; set; }
+        public virtual ProductoSubTipo IdProductoSubTipoNavigation { get; set; }
+        public virtual ProductoTipo IdProductoTipoNavigation { get; set; }
     }
 }
