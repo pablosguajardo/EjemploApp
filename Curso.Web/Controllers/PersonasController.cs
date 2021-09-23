@@ -64,12 +64,13 @@ namespace Curso.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona")] Personas personas)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona,Direccion,IdSubTipoPersona")] Personas personas)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    //personas.Borrado = false;
                     _context.Add(personas);
                     await _context.SaveChangesAsync();
 
@@ -120,7 +121,7 @@ namespace Curso.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona")] Personas personas)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdTipoPersona,Borrado,Direccion,IdSubTipoPersona")] Personas personas)
         {
             if (id != personas.Id)
             {
@@ -148,6 +149,7 @@ namespace Curso.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdTipoPersona"] = new SelectList(_context.PersonasTipo, "Id", "Nombre", personas.IdTipoPersona);
+            ViewData["IdSubTipoPersona"] = new SelectList(_context.PersonasSubTipo, "Id", "Nombre", personas.IdSubTipoPersona);
             return View(personas);
         }
 

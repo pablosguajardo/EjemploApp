@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Curso.DataAccess.Models.ClienteTipo>
+﻿@model IEnumerable<Curso.DataAccess.Models.PersonasSubTipo>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,16 +14,13 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CategoriaId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Detalles)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Borrado)
+                @Html.DisplayNameFor(model => model.IdPersonasTipoNavigation)
             </th>
             <th></th>
         </tr>
@@ -32,16 +29,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CategoriaId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Detalles)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Borrado)
+                @Html.DisplayFor(modelItem => item.IdPersonasTipoNavigation.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -507,6 +507,10 @@ namespace Curso.DataAccess.Models
             {
                 entity.Property(e => e.Borrado).HasColumnName("borrado");
 
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Stock1).HasColumnName("Stock");
             });
 
