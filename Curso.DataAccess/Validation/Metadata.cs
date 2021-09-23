@@ -340,6 +340,11 @@ namespace Curso.DataAccess.Validations
             [Required(ErrorMessage = "El campo Fecha de Compra es obligatorio.")]
             public DateTime FechaCompra { get; set; }
 
+            [Display(Name = "Comentarios")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [DataType(DataType.Text)]
+            [StringLength(100, ErrorMessage = "Máximo 100 caracteres")]
+            public string Comentarios { get; set; }
 
         }
 

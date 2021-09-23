@@ -16,6 +16,7 @@ namespace Curso.DataAccess.Models
         public DateTime FechaDeNacimiento { get; set; }
         public int IdPersona { get; set; }
         public bool? Borrado { get; set; }
+        public string Direccion { get; set; }
 
         public virtual Personas IdPersonaNavigation { get; set; }
     }

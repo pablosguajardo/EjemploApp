@@ -14,19 +14,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NroCompra)
+                <label class="control-label">NroCompra</label>
+                @*@Html.DisplayNameFor(model => model.NroCompra)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaCompra)
+                <label class="control-label">FechaCompra</label>
+                @*@Html.DisplayNameFor(model => model.FechaCompra)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PuntoDeVenta)
+                <label class="control-label">PuntoDeVenta</label>
+                @*@Html.DisplayNameFor(model => model.PuntoDeVenta)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdCompraDetalleNavigation)
+                <label class="control-label">DetalleDeCompra</label>
+                @*@Html.DisplayNameFor(model => model.IdCompraDetalleNavigation)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdformapagoNavigation)
+                <label class="control-label">PuntoDeVenta</label>
+                @*@Html.DisplayNameFor(model => model.IdformapagoNavigation)*@
+            </th>
+            <th>       
+               <label class="control-label">Comentarios</label>
+               @*@Html.DisplayNameFor(model => model.Comentarios)*@
             </th>
             <th></th>
         </tr>
@@ -48,6 +57,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdformapagoNavigation.Descripción)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentarios)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdCompras">Edit</a> |
