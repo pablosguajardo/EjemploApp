@@ -19,6 +19,7 @@ namespace Curso.DataAccess.Models
         public int IdCliente { get; set; }
         public string IdUsuario { get; set; }
         public bool? Borrado { get; set; }
+        public string Localidad { get; set; }
 
         public virtual Clientes IdClienteNavigation { get; set; }
         public virtual AspNetUsers IdUsuarioNavigation { get; set; }

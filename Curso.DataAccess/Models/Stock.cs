@@ -13,5 +13,6 @@ namespace Curso.DataAccess.Models
         public int ProductoId { get; set; }
         public int Stock1 { get; set; }
         public bool? Borrado { get; set; }
+        public string Descripcion { get; set; }
     }
 }

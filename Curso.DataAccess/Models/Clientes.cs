@@ -12,6 +12,7 @@ namespace Curso.DataAccess.Models
         public Clientes()
         {
             ClientesLog = new HashSet<ClientesLog>();
+            Ventas = new HashSet<Ventas>();
         }
 
         public int Id { get; set; }
@@ -25,5 +26,6 @@ namespace Curso.DataAccess.Models
 
         public virtual ClienteTipo ClienteTipo { get; set; }
         public virtual ICollection<ClientesLog> ClientesLog { get; set; }
+        public virtual ICollection<Ventas> Ventas { get; set; }
     }
 }

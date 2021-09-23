@@ -51,7 +51,8 @@ namespace Curso.DataAccess.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Name=DefaultConnection");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=145.239.5.236,62413;Database=EjApp;Persist Security Info=True;User ID=su;Password=Pasword124;MultipleActiveResultSets=True;");
             }
         }
 
@@ -167,6 +168,8 @@ namespace Curso.DataAccess.Models
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Origen).HasMaxLength(50);
             });
 
             modelBuilder.Entity<ClienteTipo>(entity =>
@@ -232,6 +235,8 @@ namespace Curso.DataAccess.Models
                     .IsFixedLength();
 
                 entity.Property(e => e.IdUsuario).HasMaxLength(450);
+
+                entity.Property(e => e.Localidad).HasMaxLength(50);
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
@@ -505,18 +510,26 @@ namespace Curso.DataAccess.Models
             {
                 entity.Property(e => e.Borrado).HasColumnName("borrado");
 
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Stock1).HasColumnName("Stock");
             });
 
             modelBuilder.Entity<Ventas>(entity =>
             {
-                entity.Property(e => e.ClientName).HasMaxLength(50);
-
                 entity.Property(e => e.Descripcion).HasMaxLength(50);
 
                 entity.Property(e => e.Fecha).HasColumnType("datetime");
 
                 entity.Property(e => e.Total).HasColumnType("money");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.Ventas)
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ventas_Clientes");
 
                 entity.HasOne(d => d.IdVentasDetalleNavigation)
                     .WithMany(p => p.Ventas)
