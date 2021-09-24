@@ -346,7 +346,7 @@ namespace Curso.DataAccess.Validations
 
         public partial class ComprasMetadata
         {
-            [Display(Name = "Numero de Compra")]
+            [Display(Name = "Nro de Compra")]
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             [Range(0, 9999999)]
             public int? NroCompra { get; set; }
@@ -357,7 +357,7 @@ namespace Curso.DataAccess.Validations
             [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
             public string PuntoDeVenta { get; set; }
 
-            [Display(Name = "Fecha")]
+            [Display(Name = "Fecha de Compra")]
             [DataType(DataType.Date)]
             [Required(ErrorMessage = "El campo Fecha de Compra es obligatorio.")]
             public DateTime FechaCompra { get; set; }
@@ -365,8 +365,15 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Comentarios")]
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             [DataType(DataType.Text)]
-            [StringLength(100, ErrorMessage = "Máximo 100 caracteres")]
+            [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
             public string Comentarios { get; set; }
+
+            [Display(Name = "Detalle de Compra")]
+            public virtual ComprasDetalle IdCompraDetalleNavigation { get; set; }
+
+            [Display(Name = "Forma de Pago")]
+            public virtual FormaDePago IdformapagoNavigation { get; set; }
+
 
         }
 

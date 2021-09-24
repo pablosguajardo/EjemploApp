@@ -30,16 +30,14 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PuntoDeVenta)
         </dd>
-        <dt class="col-sm-2">
-            <label class="control-label">Detalle de Compra</label>
-            @*@Html.DisplayNameFor(model => model.IdCompraDetalleNavigation)*@
+        <dt class="col-sm-2">    
+            @Html.DisplayNameFor(model => model.IdCompraDetalleNavigation)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdCompraDetalleNavigation.Descripcion)
         </dd>
         <dt class="col-sm-2">
-            <label class="control-label">Forma de Pago</label>
-            @*@Html.DisplayNameFor(model => model.IdformapagoNavigation)*@
+            @Html.DisplayNameFor(model => model.IdformapagoNavigation)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdformapagoNavigation.Descripción)
