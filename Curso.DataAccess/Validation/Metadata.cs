@@ -264,6 +264,9 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Descripcion de la categoria")]
             [StringLength(100, ErrorMessage = "Máximo {1} caracteres")]
             public string DescripcionCategoria { get; set; }
+            [Display(Name = "Comentarios")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Comentarios { get; set; }
 
         }
 

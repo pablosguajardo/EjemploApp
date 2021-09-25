@@ -493,6 +493,10 @@ namespace Curso.DataAccess.Models
             {
                 entity.HasKey(e => e.IdCategoriaProveedores);
 
+                entity.Property(e => e.Comentarios)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.DescripcionCategoria)
                     .HasMaxLength(100)
                     .IsUnicode(false)
