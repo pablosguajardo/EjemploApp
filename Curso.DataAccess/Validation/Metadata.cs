@@ -10,7 +10,7 @@ namespace Curso.DataAccess.Validations
     public class Metadata
     {
 
-        public  class PersonasMetadata
+        public class PersonasMetadata
         {
             public int Id { get; set; }
 
@@ -55,11 +55,6 @@ namespace Curso.DataAccess.Validations
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
             public string Categoria { get; set; }
-
-            [Display(Name = "Origen")]
-            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-            public string Origen { get; set; }
         }
 
         public partial class ClientesMetaData
@@ -129,11 +124,6 @@ namespace Curso.DataAccess.Validations
             [StringLength(450, ErrorMessage = "Máximo {1} caracteres")]
             public string IdUsuario { get; set; }
 
-            [Display(Name = "Localidad")]
-            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-            public string Localidad { get; set; }
-
         }
 
         public partial class ProductosMetadata
@@ -199,9 +189,9 @@ namespace Curso.DataAccess.Validations
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             public string Nombre { get; set; }
 
-            
+
         }
-      
+
 
         public class AspNetUsersMetadata
         {
@@ -213,7 +203,7 @@ namespace Curso.DataAccess.Validations
 
             [Display(Name = "Email")]
             public string Email { get; set; }
-          
+
             public string NormalizedEmail { get; set; }
 
             [Display(Name = "Email confirmado")]
@@ -254,7 +244,7 @@ namespace Curso.DataAccess.Validations
             public bool Borrado { get; set; }
 
         }
-        
+
         public partial class ProveedoresCategoriaMetadata
         {
             [Display(Name = "Nombre de la categoria")]
@@ -264,9 +254,6 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Descripcion de la categoria")]
             [StringLength(100, ErrorMessage = "Máximo {1} caracteres")]
             public string DescripcionCategoria { get; set; }
-            [Display(Name = "Comentarios")]
-            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-            public string Comentarios { get; set; }
 
         }
 
@@ -349,7 +336,7 @@ namespace Curso.DataAccess.Validations
 
         public partial class ComprasMetadata
         {
-            [Display(Name = "Nro de Compra")]
+            [Display(Name = "Numero de Compra")]
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             [Range(0, 9999999)]
             public int? NroCompra { get; set; }
@@ -360,7 +347,7 @@ namespace Curso.DataAccess.Validations
             [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
             public string PuntoDeVenta { get; set; }
 
-            [Display(Name = "Fecha de Compra")]
+            [Display(Name = "Fecha")]
             [DataType(DataType.Date)]
             [Required(ErrorMessage = "El campo Fecha de Compra es obligatorio.")]
             public DateTime FechaCompra { get; set; }
@@ -368,15 +355,8 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Comentarios")]
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             [DataType(DataType.Text)]
-            [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+            [StringLength(100, ErrorMessage = "Máximo 100 caracteres")]
             public string Comentarios { get; set; }
-
-            [Display(Name = "Detalle de Compra")]
-            public virtual ComprasDetalle IdCompraDetalleNavigation { get; set; }
-
-            [Display(Name = "Forma de Pago")]
-            public virtual FormaDePago IdformapagoNavigation { get; set; }
-
 
         }
 
@@ -407,10 +387,6 @@ namespace Curso.DataAccess.Validations
         [Display(Name = "Persona")]
         public int IdPersona { get; set; }
 
-        [Display(Name = "Dirección")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-        public string Direccion { get; set; }
 
     }
 
@@ -454,6 +430,11 @@ namespace Curso.DataAccess.Validations
         public string Descripción { get; set; }
 
         public virtual ICollection<Compras> Compras { get; set; }
+
+        [Display(Name = "Estado")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+        public string Estado { get; set; }
 
     }
 }

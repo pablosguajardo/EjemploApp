@@ -9,18 +9,44 @@
 <h4>FormaDePago</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Descripción" class="control-label"></label>
-                <input asp-for="Descripción" class="form-control" />
-                <span asp-validation-for="Descripción" class="text-danger"></span>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Descripción" class="control-label"></label>
+                        <input asp-for="Descripción" class="form-control" />
+                        <span asp-validation-for="Descripción" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Estado" class="control-label"></label>
+                        <input asp-for="Estado" class="form-control" />
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">
+                            @Html.DisplayNameFor(model => model.Borrado)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            @Html.CheckBox("Borrado", Model.Borrado.GetValueOrDefault(), new { @class = "" })
+                        </label>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+
+
         </form>
     </div>
 </div>

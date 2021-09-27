@@ -56,7 +56,7 @@ namespace Curso.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Descripción")] FormaDePago formaDePago)
+        public async Task<IActionResult> Create([Bind("Id,Descripción,Estado")] FormaDePago formaDePago)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Curso.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripción")] FormaDePago formaDePago)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripción,Borrado,Estado")] FormaDePago formaDePago)
         {
             if (id != formaDePago.Id)
             {
