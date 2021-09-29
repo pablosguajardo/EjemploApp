@@ -59,14 +59,14 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label asp-for="IdProductoCategoria" class="control-label"></label>
-                        <select asp-for="IdProductoCategoria" onchange="changeCategoriaProducto();" class="form-control" asp-items="ViewBag.IdProductoSubTipo"></select>
+                        <select asp-for="IdProductoCategoria" onchange="changeCategoriaProducto();" class="form-control" asp-items="ViewBag.IdProductoCategoria"></select>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
                         <label asp-for="IdProductoSubTipo" class="control-label"></label>
-                        <select asp-for="IdProductoSubTipo" onchange="changeCategoriaProducto();" class="form-control" asp-items="ViewBag.IdProductoCategoria"></select>
+                        <select asp-for="IdProductoSubTipo" onchange="changeCategoriaProducto();" class="form-control" asp-items="ViewBag.IdProductoSubTipo"></select>
                     </div>
                 </div>
 
