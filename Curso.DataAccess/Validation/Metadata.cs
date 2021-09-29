@@ -159,6 +159,11 @@ namespace Curso.DataAccess.Validations
         public partial class ProductoTipoMetadata
         {
             public int ProductId { get; set; }
+            
+            [Display(Name = "Nombre")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
 
             [Display(Name = "Descripcion")]
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
@@ -168,7 +173,7 @@ namespace Curso.DataAccess.Validations
             [Display(Name = "Campo Nuevo")]
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-            public string campoNuevo { get; set; }
+            public string CampoNuevo { get; set; }
 
         }
 
