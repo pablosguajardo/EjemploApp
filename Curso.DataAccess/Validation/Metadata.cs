@@ -360,81 +360,83 @@ namespace Curso.DataAccess.Validations
 
         }
 
+        public partial class PersonaLogMetadata
+        {
+            [Display(Name = "Nombre del cliente")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
+
+            [Display(Name = "Apellido")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Apellido { get; set; }
+
+            [Display(Name = "Cantidad de hermanos")]
+            public int? Hermanos { get; set; }
+
+            [Display(Name = "Fecha de nacimiento")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [DataType(DataType.Date)]
+            public DateTime FechaDeNacimiento { get; set; }
+
+            [Display(Name = "Persona")]
+            public int IdPersona { get; set; }
+
+
+        }
+
+        public partial class ProductoTipo
+        {
+
+            public int IdProductoTipo { get; set; }
+
+            [Display(Name = "Descripción")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Descripcion { get; set; }
+
+            [Display(Name = "Nombre")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Nombre { get; set; }
+
+        }
+
+
+        public partial class ComprasDetalleMetadata
+        {
+
+            public int IdComprasDetalle { get; set; }
+
+            [Display(Name = "Descripción")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Descripcion { get; set; }
+
+        }
+
+        public partial class FormaDePagoMetadata
+        {
+            public int Id { get; set; }
+
+            [Display(Name = "Descripción")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Descripción { get; set; }
+
+            public virtual ICollection<Compras> Compras { get; set; }
+
+            [Display(Name = "Estado")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+            [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
+            public string Estado { get; set; }
+
+        }
+
 
     }
 
 
-    public partial class PersonaLogMetadata
-    {
-        [Display(Name = "Nombre del cliente")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-        public string Nombre { get; set; }
-
-        [Display(Name = "Apellido")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-        public string Apellido { get; set; }
-
-        [Display(Name = "Cantidad de hermanos")]
-        public int? Hermanos { get; set; }
-
-        [Display(Name = "Fecha de nacimiento")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [DataType(DataType.Date)]
-        public DateTime FechaDeNacimiento { get; set; }
-
-        [Display(Name = "Persona")]
-        public int IdPersona { get; set; }
-
-
-    }
-
-    public partial class ProductoTipo
-    {
-
-        public int IdProductoTipo { get; set; }
-
-        [Display(Name = "Descripción")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-        public string Descripcion { get; set; }
-
-        [Display(Name = "Nombre")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-        public string Nombre { get; set; }
-
-    }
-
-
-    public partial class ComprasDetalleMetadata
-    {
-
-        public int IdComprasDetalle { get; set; }
-
-        [Display(Name = "Descripción")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-        public string Descripcion { get; set; }
-
-    }
-
-    public partial class FormaDePagoMetadata
-    {
-        public int Id { get; set; }
-
-        [Display(Name = "Descripción")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-        public string Descripción { get; set; }
-
-        public virtual ICollection<Compras> Compras { get; set; }
-
-        [Display(Name = "Estado")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
-        public string Estado { get; set; }
-
-    }
+   
 }
