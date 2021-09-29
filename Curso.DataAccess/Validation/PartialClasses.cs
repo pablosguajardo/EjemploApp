@@ -59,7 +59,7 @@ namespace Curso.DataAccess.Models
     {
     }
 
-    [ModelMetadataType(typeof(PersonaLog))]
+    [ModelMetadataType(typeof(PersonaLogMetadata))]
     public partial class PersonaLog
     {
     }

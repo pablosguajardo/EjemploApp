@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
@@ -90,6 +91,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Hermanos,FechaDeNacimiento,IdPersona,Direccion")] PersonaLog personaLog)
         {
             if (id != personaLog.Id)
@@ -122,6 +124,7 @@ namespace Curso.Web.Controllers
         }
 
         // GET: PersonaLogs/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +146,7 @@ namespace Curso.Web.Controllers
         // POST: PersonaLogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var personaLog = await _context.PersonaLog.FindAsync(id);
