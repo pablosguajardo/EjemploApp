@@ -313,6 +313,8 @@ namespace Curso.DataAccess.Models
                 entity.Property(e => e.Descripción)
                     .IsRequired()
                     .HasMaxLength(30);
+
+                entity.Property(e => e.Estado).HasMaxLength(30);
             });
 
             modelBuilder.Entity<Logs>(entity =>
@@ -513,11 +515,9 @@ namespace Curso.DataAccess.Models
             {
                 entity.Property(e => e.Borrado).HasColumnName("borrado");
 
-                entity.Property(e => e.Descripcion)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.Descripcion).HasMaxLength(50);
 
-                entity.Property(e => e.Stock1).HasColumnName("Stock");
+                entity.Property(e => e.Cantidad).HasColumnName("Stock");
             });
 
             modelBuilder.Entity<Ventas>(entity =>

@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
-    public class StocksController : Controller
+    public class StockController : Controller
     {
         private readonly EjAppContext _context;
 
-        public StocksController(EjAppContext context)
+        public StockController(EjAppContext context)
         {
             _context = context;
         }
@@ -54,7 +54,7 @@ namespace Curso.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductoId,Stock1")] Stock stock)
+        public async Task<IActionResult> Create([Bind("Id,ProductoId,Cantidad,Descripcion")] Stock stock)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace Curso.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductoId,Stock1")] Stock stock)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductoId,Cantidad,Descripcion,Borrado")] Stock stock)
         {
             if (id != stock.Id)
             {

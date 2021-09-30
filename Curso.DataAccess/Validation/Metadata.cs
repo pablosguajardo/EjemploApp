@@ -262,6 +262,24 @@ namespace Curso.DataAccess.Validations
 
         }
 
+        public class StockMetadata
+        {
+            [Display(Name = "ProductoId")]
+            [Required(ErrorMessage = "El campo ProductoId es obligatorio.")]
+            public int ProductoId { get; set; }
+
+            [Display(Name = "Cantidad")]
+            [Required(ErrorMessage = "El campo Stock es obligatorio.")]
+            public int Stock1 { get; set; }
+
+            [Display(Name = "Descripcion")]
+            [DataType(DataType.Text)]
+            [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+            public string Descripcion { get; set; }
+                        
+        }
+
+
         public class VentasMetadata
         {
             [Display(Name = "ClientId")]

@@ -50,6 +50,13 @@ namespace Curso.DataAccess.Models
     }
 
     [ModelMetadataType(typeof(VentasMetadata))]
+
+    public partial class Stock
+    {
+
+    }
+    [ModelMetadataType(typeof(StockMetadata))]
+
     public partial class Ventas
     {
     }
