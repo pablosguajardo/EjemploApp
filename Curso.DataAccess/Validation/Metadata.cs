@@ -346,7 +346,7 @@ namespace Curso.DataAccess.Validations
             [StringLength(50, ErrorMessage = "Máximo {1} caracteres")]
             public string Descripcion { get; set; }
 
-            [Display(Name = "Categoria_ID")]
+            [Display(Name = "Categoria")]
             [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             public int? CategoriaId { get; set; }
 

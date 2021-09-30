@@ -27,7 +27,7 @@
 
                     <div class="form-group">
                         <label asp-for="CategoriaId" class="control-label"></label>
-                        <input asp-for="CategoriaId" class="form-control" />
+                        <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
                         <span asp-validation-for="CategoriaId" class="text-danger"></span>
                     </div>
 

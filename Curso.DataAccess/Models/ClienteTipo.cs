@@ -20,6 +20,7 @@ namespace Curso.DataAccess.Models
         public string Detalles { get; set; }
         public bool? Borrado { get; set; }
 
+        public virtual ClienteCategoria Categoria { get; set; }
         public virtual ICollection<Clientes> Clientes { get; set; }
     }
 }
