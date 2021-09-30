@@ -282,12 +282,12 @@ namespace Curso.DataAccess.Validations
 
         public class VentasMetadata
         {
-            [Display(Name = "ClientId")]
-            [Required(ErrorMessage = "El campo ClientId es obligatorio.")]
+            [Display(Name = "ID de Cliente")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             public int ClientId { get; set; }
 
             [Display(Name = "Total")]
-            [Required(ErrorMessage = "El campo Total es obligatorio.")]
+            [Required(ErrorMessage = "El campo {0} es obligatorio.")]
             public decimal Total { get; set; }
 
             [Display(Name = "Fecha")]

@@ -21,7 +21,7 @@ namespace Curso.Web.Controllers
         // GET: Ventas
         public async Task<IActionResult> Index()
         {
-            var ejAppContext = _context.Ventas.Include(v => v.IdVentasDetalleNavigation);
+            var ejAppContext = _context.Ventas.Include(v => v.IdVentasDetalleNavigation).Include(v => v.Client);
             return View(await ejAppContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace Curso.Web.Controllers
 
             var ventas = await _context.Ventas
                 .Include(v => v.IdVentasDetalleNavigation)
+                .Include(v => v.Client)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (ventas == null)
             {
@@ -48,6 +49,7 @@ namespace Curso.Web.Controllers
         public IActionResult Create()
         {
             ViewData["IdVentasDetalle"] = new SelectList(_context.VentasDetalle, "IdDetalleVenta", "IdDetalleVenta");
+            ViewData["ClientId"] = new SelectList(_context.Clientes, "Id", "Id");
             return View();
         }
 
@@ -65,6 +67,7 @@ namespace Curso.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdVentasDetalle"] = new SelectList(_context.VentasDetalle, "IdDetalleVenta", "IdDetalleVenta", ventas.IdVentasDetalle);
+            ViewData["ClientId"] = new SelectList(_context.Clientes, "Id", "Id", ventas.ClientId);
             return View(ventas);
         }
 
@@ -82,6 +85,7 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
             ViewData["IdVentasDetalle"] = new SelectList(_context.VentasDetalle, "IdDetalleVenta", "IdDetalleVenta", ventas.IdVentasDetalle);
+            ViewData["ClientId"] = new SelectList(_context.Clientes, "Id", "Id", ventas.ClientId);
             return View(ventas);
         }
 
@@ -118,6 +122,7 @@ namespace Curso.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdVentasDetalle"] = new SelectList(_context.VentasDetalle, "IdDetalleVenta", "IdDetalleVenta", ventas.IdVentasDetalle);
+            ViewData["ClientId"] = new SelectList(_context.Clientes, "Id", "Id", ventas.ClientId);
             return View(ventas);
         }
 
@@ -131,6 +136,7 @@ namespace Curso.Web.Controllers
 
             var ventas = await _context.Ventas
                 .Include(v => v.IdVentasDetalleNavigation)
+                .Include(v => v.Client)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (ventas == null)
             {
