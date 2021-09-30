@@ -27,6 +27,7 @@ namespace Curso.DataAccess.Models
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CategoriaProducto> CategoriaProducto { get; set; }
+        public virtual DbSet<ClienteCategoria> ClienteCategoria { get; set; }
         public virtual DbSet<ClienteTipo> ClienteTipo { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<ClientesLog> ClientesLog { get; set; }
@@ -171,6 +172,15 @@ namespace Curso.DataAccess.Models
                 entity.Property(e => e.Origen).HasMaxLength(50);
             });
 
+            modelBuilder.Entity<ClienteCategoria>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Categoria)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
             modelBuilder.Entity<ClienteTipo>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -185,6 +195,12 @@ namespace Curso.DataAccess.Models
                 entity.Property(e => e.Detalles)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Categoria)
+                    .WithMany(p => p.ClienteTipo)
+                    .HasForeignKey(d => d.CategoriaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClienteTipo_ClienteCategoria");
             });
 
             modelBuilder.Entity<Clientes>(entity =>
@@ -515,7 +531,9 @@ namespace Curso.DataAccess.Models
             {
                 entity.Property(e => e.Borrado).HasColumnName("borrado");
 
-                entity.Property(e => e.Descripcion).HasMaxLength(50);
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Cantidad).HasColumnName("Stock");
             });

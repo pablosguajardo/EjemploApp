@@ -6,27 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Curso.DataAccess.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Curso.Web.Controllers
 {
-    public class ClienteTipoesController : Controller
+    public class ClienteCategoriasController : Controller
     {
         private readonly EjAppContext _context;
 
-        public ClienteTipoesController(EjAppContext context)
+        public ClienteCategoriasController(EjAppContext context)
         {
             _context = context;
         }
 
-        // GET: ClienteTipoes
+        // GET: ClienteCategorias
         public async Task<IActionResult> Index()
         {
-            var ejAppContext = _context.ClienteTipo.Include(c => c.Categoria);
-            return View(await ejAppContext.ToListAsync());
+            return View(await _context.ClienteCategoria.ToListAsync());
         }
 
-        // GET: ClienteTipoes/Details/5
+        // GET: ClienteCategorias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +32,39 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var clienteTipo = await _context.ClienteTipo
-                .Include(c => c.Categoria)
+            var clienteCategoria = await _context.ClienteCategoria
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clienteTipo == null)
+            if (clienteCategoria == null)
             {
                 return NotFound();
             }
 
-            return View(clienteTipo);
+            return View(clienteCategoria);
         }
 
-        // GET: ClienteTipoes/Create
+        // GET: ClienteCategorias/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.ClienteCategoria, "Id", "Categoria");
             return View();
         }
 
-        // POST: ClienteTipoes1/Create
+        // POST: ClienteCategorias/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion,CategoriaId,Detalles,Borrado")] ClienteTipo clienteTipo)
+        public async Task<IActionResult> Create([Bind("Id,Categoria")] ClienteCategoria clienteCategoria)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clienteTipo);
+                _context.Add(clienteCategoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.ClienteCategoria, "Id", "Categoria", clienteTipo.CategoriaId);
-            return View(clienteTipo);
+            return View(clienteCategoria);
         }
 
-        // GET: ClienteTipoes/Edit/5
+        // GET: ClienteCategorias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +72,22 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var clienteTipo = await _context.ClienteTipo.FindAsync(id);
-            if (clienteTipo == null)
+            var clienteCategoria = await _context.ClienteCategoria.FindAsync(id);
+            if (clienteCategoria == null)
             {
                 return NotFound();
             }
-            ViewData["CategoriaId"] = new SelectList(_context.ClienteCategoria, "Id", "Categoria", clienteTipo.CategoriaId);
-            return View(clienteTipo);
+            return View(clienteCategoria);
         }
 
-        // POST: ClienteTipoes1/Edit/5
+        // POST: ClienteCategorias/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,CategoriaId,Detalles,Borrado")] ClienteTipo clienteTipo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Categoria")] ClienteCategoria clienteCategoria)
         {
-            if (id != clienteTipo.Id)
+            if (id != clienteCategoria.Id)
             {
                 return NotFound();
             }
@@ -102,12 +96,12 @@ namespace Curso.Web.Controllers
             {
                 try
                 {
-                    _context.Update(clienteTipo);
+                    _context.Update(clienteCategoria);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteTipoExists(clienteTipo.Id))
+                    if (!ClienteCategoriaExists(clienteCategoria.Id))
                     {
                         return NotFound();
                     }
@@ -118,12 +112,10 @@ namespace Curso.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.ClienteCategoria, "Id", "Categoria", clienteTipo.CategoriaId);
-            return View(clienteTipo);
+            return View(clienteCategoria);
         }
 
-        // GET: ClienteTipoes/Delete/5
-        [Authorize(Roles = "Administrador")]
+        // GET: ClienteCategorias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,32 +123,30 @@ namespace Curso.Web.Controllers
                 return NotFound();
             }
 
-            var clienteTipo = await _context.ClienteTipo
-                .Include(c => c.Categoria)
+            var clienteCategoria = await _context.ClienteCategoria
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clienteTipo == null)
+            if (clienteCategoria == null)
             {
                 return NotFound();
             }
 
-            return View(clienteTipo);
+            return View(clienteCategoria);
         }
 
-        // POST: ClienteTipoes/Delete/5
+        // POST: ClienteCategorias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clienteTipo = await _context.ClienteTipo.FindAsync(id);
-            _context.ClienteTipo.Remove(clienteTipo);
+            var clienteCategoria = await _context.ClienteCategoria.FindAsync(id);
+            _context.ClienteCategoria.Remove(clienteCategoria);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteTipoExists(int id)
+        private bool ClienteCategoriaExists(int id)
         {
-            return _context.ClienteTipo.Any(e => e.Id == id);
+            return _context.ClienteCategoria.Any(e => e.Id == id);
         }
     }
 }
